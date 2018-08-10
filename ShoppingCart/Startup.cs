@@ -8,11 +8,15 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using ShoppingCart.Models;
 using Microsoft.EntityFrameworkCore;
+using ShoppingCart.Abstract;
+using ShoppingCart.Concrete;
 
 namespace ShoppingCart
 {
     public class Startup
     {
+       
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -23,8 +27,9 @@ namespace ShoppingCart
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddTransient<ILoginData, LoginData>();
             services.AddMvc();
-            var connection = @"Server=(localdb)\mssqllocaldb;Database=ShoppingCart;Trusted_Connection=True;ConnectRetryCount=0";
+            var connection = @"Server=CJ\SQLEXPRESS;Database=ShoppingCartDb;Trusted_Connection=True;ConnectRetryCount=0";
             services.AddDbContext<ShoppingCartDbContext>(options => options.UseSqlServer(connection));
         }
 
@@ -47,7 +52,7 @@ namespace ShoppingCart
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{area=Administration}/{controller=Login}/{action=SignUp}/{id?}");
             });
         }
     }
