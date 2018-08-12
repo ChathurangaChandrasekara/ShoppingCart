@@ -18,7 +18,6 @@ namespace ShoppingCart.Models
         public string Address { get; set; }
 
         [Required]
-        [Unique]
         [DataType(DataType.EmailAddress, ErrorMessage = "Invalid Email Address")]
         public string Email { get; set; }
 
