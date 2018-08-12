@@ -27,6 +27,7 @@ namespace ShoppingCart
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddTransient<IAdminData, AdminData>();
             services.AddTransient<ILoginData, LoginData>();
             services.AddMvc();
             var connection = @"Server=CJ\SQLEXPRESS;Database=ShoppingCartDb;Trusted_Connection=True;ConnectRetryCount=0";
@@ -52,7 +53,7 @@ namespace ShoppingCart
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{area=Administration}/{controller=Login}/{action=SignUp}/{id?}");
+                    template: "{area=Administration}/{controller=Admin}/{action=Active}/{id?}");
             });
         }
     }

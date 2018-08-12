@@ -48,7 +48,7 @@ namespace ShoppingCart.Areas.Administration.Controllers
                 }
                 else if (loginobj.LoginType == "Admin")
                 {
-                    return RedirectToAction("Index", "Admin", new { area = "Admin" });
+                    return RedirectToAction("Index", "Admin", new { area = "Administration" });
                 }
                 else
                 {
