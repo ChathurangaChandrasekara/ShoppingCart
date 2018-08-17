@@ -14,7 +14,10 @@ namespace ShoppingCart.Models
 
         public DbSet<SignUp> SignUps { get; set; }
 
-        public DbSet<ShoppingCart.Areas.Administration.Models.SignUpDTO> SignUpDTO { get; set; }
+        public DbSet<MoreDetail> MoreDetails { get; set; }
 
+        public DbSet<ItemCategory> ItemCategories { get; set; }
+
+        public DbSet<Item> Items { get; set; }
     }
 }

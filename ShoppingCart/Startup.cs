@@ -27,6 +27,8 @@ namespace ShoppingCart
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddTransient<IItemData, ItemData>();
+            services.AddTransient<IShopData, ShopData>();
             services.AddTransient<IAdminData, AdminData>();
             services.AddTransient<ILoginData, LoginData>();
             services.AddMvc();
@@ -53,7 +55,7 @@ namespace ShoppingCart
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{area=Administration}/{controller=Admin}/{action=Active}/{id?}");
+                    template: "{area=Administration}/{controller=Login}/{action=Login}/{id?}");
             });
         }
     }

@@ -33,6 +33,7 @@ namespace ShoppingCart.Areas.Administration.Controllers
                 
             LoginMessaageDTO loginobj =   _loginData.checkLogin(obj);
                 message = loginobj.Message;
+                string email = loginobj.Email;
                 ViewBag.message = message;
                 if (loginobj.LoginType== "Error")
                 {
@@ -42,9 +43,13 @@ namespace ShoppingCart.Areas.Administration.Controllers
                 {
                     return RedirectToAction("Index", "User", new { area = "User" });
                 }
-                else if (loginobj.LoginType == "Shop")
+                else if (loginobj.LoginType == "Shop" && loginobj.Active== true)
                 {
-                    return RedirectToAction("Index", "Shop", new { area = "Shop" });
+                    return RedirectToAction("Index", "Shop", new { area = "Shop", Id = email });
+                }
+                else if (loginobj.LoginType == "Shop" && loginobj.Active == null)
+                {
+                    return RedirectToAction("WaitActiveRequest", "Login", new { area = "Administration" });
                 }
                 else if (loginobj.LoginType == "Admin")
                 {
@@ -87,6 +92,11 @@ namespace ShoppingCart.Areas.Administration.Controllers
                     throw;
                 }
             }
+            return View();
+        }
+
+        public ActionResult WaitActiveRequest()
+        {
             return View();
         }
     }

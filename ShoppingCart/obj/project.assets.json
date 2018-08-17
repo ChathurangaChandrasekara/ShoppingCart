@@ -13647,11 +13647,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Mr Chathuranga\\source\\repos\\ShoppingCart\\ShoppingCart\\ShoppingCart.csproj",
+      "projectUniqueName": "E:\\GitClone\\ShoppingCart\\ShoppingCart\\ShoppingCart.csproj",
       "projectName": "ShoppingCart",
-      "projectPath": "C:\\Users\\Mr Chathuranga\\source\\repos\\ShoppingCart\\ShoppingCart\\ShoppingCart.csproj",
+      "projectPath": "E:\\GitClone\\ShoppingCart\\ShoppingCart\\ShoppingCart.csproj",
       "packagesPath": "C:\\Users\\Mr Chathuranga\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Mr Chathuranga\\source\\repos\\ShoppingCart\\ShoppingCart\\obj\\",
+      "outputPath": "E:\\GitClone\\ShoppingCart\\ShoppingCart\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

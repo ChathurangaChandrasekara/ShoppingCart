@@ -11,5 +11,8 @@ namespace ShoppingCart.Areas.Administration.Models
 
         public string LoginType { get; set; }
 
+        public string Email { get; set; }
+
+        public bool? Active { get; set; }
     }
 }

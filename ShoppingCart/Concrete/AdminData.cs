@@ -41,7 +41,7 @@ namespace ShoppingCart.Concrete
         public List<SignUpDTO> GetPendingShop()
         {
             List<SignUpDTO> PendingShopListSignUpDTO = new List<SignUpDTO>();
-            List<SignUp> Pendingshoplist = _db.SignUps.Where(x => x.Active == Convert.ToBoolean(0) && x.LoginType == "Shop").ToList();
+            List<SignUp> Pendingshoplist = _db.SignUps.Where(x => x.Active == null).ToList();
             foreach (var item in Pendingshoplist)
             {
                 SignUpDTO obj = new SignUpDTO();

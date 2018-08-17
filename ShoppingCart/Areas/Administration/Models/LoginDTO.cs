@@ -19,7 +19,7 @@ namespace ShoppingCart.Areas.Administration.Models
         [DataType(DataType.Password)]
         public string Password { get; set; }
 
-       
+        public bool? Active { get; set; }
 
     }
 }

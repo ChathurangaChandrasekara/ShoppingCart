@@ -4,16 +4,28 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using ShoppingCart.Abstract;
+using ShoppingCart.Areas.Administration.Models;
+using ShoppingCart.Areas.Shop.Models;
 
 namespace ShoppingCart.Areas.Shop.Controllers
 {
     public class ShopController : Controller
     {
-        // GET: Shop
-        public ActionResult Index()
+        public IShopData _shopData;
+        public ShopController(IShopData shopData)
         {
-            return View();
+            _shopData = shopData;
         }
+
+
+        // ******* View Shop Details ********
+        public ActionResult Index(string id)
+        {
+            return View(_shopData.ShopDetailId(id));
+        }
+
+
 
         // GET: Shop/Details/5
         public ActionResult Details(int id)
@@ -45,7 +57,8 @@ namespace ShoppingCart.Areas.Shop.Controllers
         }
 
         // GET: Shop/Edit/5
-        public ActionResult Edit(int id)
+        [HttpGet]
+        public ActionResult Edit(string Email)
         {
             return View();
         }
@@ -53,18 +66,22 @@ namespace ShoppingCart.Areas.Shop.Controllers
         // POST: Shop/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(MoreDetailDTO obj)
         {
-            try
+            if (ModelState.IsValid)
             {
-                // TODO: Add update logic here
-
-                return RedirectToAction(nameof(Index));
+                try
+                {
+                    // TODO: Add update logic here
+                    
+                    return RedirectToAction("Index", "Shop");
+                }
+                catch (Exception ex)
+                {
+                    throw;
+                }
             }
-            catch
-            {
-                return View();
-            }
+            return View();
         }
 
         // GET: Shop/Delete/5
@@ -89,5 +106,7 @@ namespace ShoppingCart.Areas.Shop.Controllers
                 return View();
             }
         }
+
+        
     }
 }
