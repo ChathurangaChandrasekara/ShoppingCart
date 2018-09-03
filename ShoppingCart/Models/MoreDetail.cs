@@ -17,7 +17,8 @@ namespace ShoppingCart.Models
         public string Location { get; set; }
         public string ImageUrl { get; set; }
 
-        public SignUp signUp { get; set; }
+        public SignUp signUp;
+        public int SignUpId { get; set; }
 
 
     }

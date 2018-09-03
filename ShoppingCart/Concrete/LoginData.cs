@@ -24,16 +24,18 @@ namespace ShoppingCart.Concrete
             {
                 string LoginType = _db.SignUps.Where(x => x.Email == loginobj.Email).Select(x => x.LoginType).FirstOrDefault();
                 bool? Active = _db.SignUps.Where(x => x.Email == loginobj.Email).Select(x => x.Active).FirstOrDefault();
+                int Id = _db.SignUps.Where(x => x.Email == loginobj.Email).Select(x => x.SignUpId).FirstOrDefault();
                 if (LoginType == "User")
                 {
-
+                    msgObj.Id = Id;
                     msgObj.Email = loginobj.Email;
                     msgObj.Message = "user login";
                     msgObj.LoginType = "User";
                 }
                 else if(LoginType == "Shop")
                 {
-                    msgObj.Active = loginobj.Active;
+                    msgObj.Id = Id;
+                    msgObj.Active = Active;
                     msgObj.Email = loginobj.Email;
                     msgObj.Message = "Shop login";
                     msgObj.LoginType = "Shop";

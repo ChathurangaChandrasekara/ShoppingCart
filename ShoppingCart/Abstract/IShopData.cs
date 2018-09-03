@@ -9,7 +9,7 @@ namespace ShoppingCart.Abstract
 {
     public interface IShopData
     {
-        SignUpDTO ShopDetailId(string id);
+        SignUpDTO ShopDetailId(int id);
         void EditAllShopDetail(MoreDetailDTO obj);
     }
 }

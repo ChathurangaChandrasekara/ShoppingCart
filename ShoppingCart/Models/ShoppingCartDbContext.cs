@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ShoppingCart.Areas.Shop.Models;
 
 namespace ShoppingCart.Models
 {
@@ -19,5 +20,6 @@ namespace ShoppingCart.Models
         public DbSet<ItemCategory> ItemCategories { get; set; }
 
         public DbSet<Item> Items { get; set; }
+
     }
 }

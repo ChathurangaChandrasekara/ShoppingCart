@@ -20,7 +20,7 @@ namespace ShoppingCart.Concrete
         public List<SignUpDTO> GetActiveShop()
         {
             List<SignUpDTO> ActiveShopListSignUpDTO = new List<SignUpDTO>();
-            List<SignUp> Activeshoplist = _db.SignUps.Where(x => x.Active == Convert.ToBoolean(1) && x.LoginType=="Shop").ToList();
+            List<SignUp> Activeshoplist = _db.SignUps.Where(x => x.Active == true && x.LoginType=="Shop").ToList();
             foreach (var item in Activeshoplist)
             {
                 SignUpDTO obj = new SignUpDTO();
@@ -41,7 +41,7 @@ namespace ShoppingCart.Concrete
         public List<SignUpDTO> GetPendingShop()
         {
             List<SignUpDTO> PendingShopListSignUpDTO = new List<SignUpDTO>();
-            List<SignUp> Pendingshoplist = _db.SignUps.Where(x => x.Active == null).ToList();
+            List<SignUp> Pendingshoplist = _db.SignUps.Where(x => x.Active == false && x.LoginType=="Shop").ToList();
             foreach (var item in Pendingshoplist)
             {
                 SignUpDTO obj = new SignUpDTO();
@@ -126,7 +126,7 @@ namespace ShoppingCart.Concrete
         public List<SignUpDTO> SearchUser(string searchName)
         {
             List<SignUpDTO> SearchUserSignUpDTO = new List<SignUpDTO>();
-            List<SignUp> SearchUserList = _db.SignUps.Where(x => x.FullName.Contains(searchName) && x.LoginType == "User" && x.Active == true).ToList();
+            List<SignUp> SearchUserList = _db.SignUps.Where(x => x.FullName.Contains(searchName) && x.LoginType == "User" && x.Active == null).ToList();
             foreach (var item in SearchUserList)
             {
                 SignUpDTO obj = new SignUpDTO();
@@ -138,6 +138,7 @@ namespace ShoppingCart.Concrete
                 obj.Password = item.Password;
                 obj.PhoneNumber = item.PhoneNumber;
                 obj.SignUpId = item.SignUpId;
+
                 SearchUserSignUpDTO.Add(obj);
             }
 

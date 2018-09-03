@@ -69,7 +69,7 @@ using ShoppingCart.Models;
             WriteLiteral("\r\n<h2>Active</h2>\r\n\r\n<p>\r\n    ");
             EndContext();
             BeginContext(193, 37, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "e1d6f54c072e469db6d8b46bedddbaba", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "7259f6a5ca1c4a2fb26dd85bf381329d", async() => {
                 BeginContext(216, 10, true);
                 WriteLiteral("Create New");
                 EndContext();
@@ -91,7 +91,7 @@ using ShoppingCart.Models;
             WriteLiteral("\r\n</p>\r\n");
             EndContext();
             BeginContext(238, 223, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "62bb3b378bf24fd3a8caa8d0cf6532c2", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "6669267584b342a780788742fd44384d", async() => {
                 BeginContext(327, 127, true);
                 WriteLiteral("\r\n    <input type=\"text\" name=\"search\" class=\"form-control\" />\r\n    <button type=\"submit\" class=\"btn-default\">Search</button>\r\n");
                 EndContext();
@@ -270,7 +270,7 @@ using ShoppingCart.Models;
             WriteLiteral("\r\n                </td>\r\n                <td>\r\n                    ");
             EndContext();
             BeginContext(2160, 86, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "00d043a886994088a87923a66ba9087c", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "32b605d848c647a7b9e7bbdfb9cde841", async() => {
                 BeginContext(2238, 4, true);
                 WriteLiteral("Edit");
                 EndContext();
@@ -307,7 +307,7 @@ using ShoppingCart.Models;
             WriteLiteral(" |\r\n                    ");
             EndContext();
             BeginContext(2270, 65, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "8794fcc7595c4c6bb1d09ae9e7ec3c16", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "b203557b899c45f6bccb701294a98a8e", async() => {
                 BeginContext(2324, 7, true);
                 WriteLiteral("Details");
                 EndContext();
@@ -342,7 +342,7 @@ using ShoppingCart.Models;
             WriteLiteral(" |\r\n                    ");
             EndContext();
             BeginContext(2359, 86, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "223f7a42a7c040a2ae4a82ff6e2ce112", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "ed19defc66b24c448e45e51bdb7fef97", async() => {
                 BeginContext(2435, 6, true);
                 WriteLiteral("Delete");
                 EndContext();

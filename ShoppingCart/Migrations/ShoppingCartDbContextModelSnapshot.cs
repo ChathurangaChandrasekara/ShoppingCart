@@ -29,7 +29,7 @@ namespace ShoppingCart.Migrations
 
                     b.Property<string>("ImageUrl");
 
-                    b.Property<int?>("ItemCategoryId");
+                    b.Property<int>("ItemCategoryId");
 
                     b.Property<string>("ItemCode");
 
@@ -37,15 +37,11 @@ namespace ShoppingCart.Migrations
 
                     b.Property<int>("Quantity");
 
-                    b.Property<int?>("SignUpId");
+                    b.Property<int>("SignUpId");
 
                     b.Property<int>("UnitPrice");
 
                     b.HasKey("ItemId");
-
-                    b.HasIndex("ItemCategoryId");
-
-                    b.HasIndex("SignUpId");
 
                     b.ToTable("Items");
                 });
@@ -57,6 +53,8 @@ namespace ShoppingCart.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("ItemCategoryName");
+
+                    b.Property<int>("SignUpId");
 
                     b.HasKey("ItemCategoryId");
 
@@ -77,11 +75,9 @@ namespace ShoppingCart.Migrations
 
                     b.Property<string>("Location");
 
-                    b.Property<int?>("SignUpId");
+                    b.Property<int>("SignUpId");
 
                     b.HasKey("MoreDetailId");
-
-                    b.HasIndex("SignUpId");
 
                     b.ToTable("MoreDetails");
                 });
@@ -115,24 +111,6 @@ namespace ShoppingCart.Migrations
                     b.HasKey("SignUpId");
 
                     b.ToTable("SignUps");
-                });
-
-            modelBuilder.Entity("ShoppingCart.Models.Item", b =>
-                {
-                    b.HasOne("ShoppingCart.Models.ItemCategory", "itemCategory")
-                        .WithMany()
-                        .HasForeignKey("ItemCategoryId");
-
-                    b.HasOne("ShoppingCart.Models.SignUp", "signUp")
-                        .WithMany()
-                        .HasForeignKey("SignUpId");
-                });
-
-            modelBuilder.Entity("ShoppingCart.Models.MoreDetail", b =>
-                {
-                    b.HasOne("ShoppingCart.Models.SignUp", "signUp")
-                        .WithMany()
-                        .HasForeignKey("SignUpId");
                 });
 #pragma warning restore 612, 618
         }

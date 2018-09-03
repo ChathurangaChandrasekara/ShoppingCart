@@ -1,0 +1,43 @@
+﻿@model IEnumerable<ShoppingCart.Areas.Shop.Models.ItemCategoryDTO>
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers 
+@{
+    ViewData["Title"] = "Index";
+    Layout = "_ShopLayout";
+}
+
+<h2>Index</h2>
+
+<p>
+    <a asp-action="Create" asp-route-id="@TempData["id"]">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ItemCategoryName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SignUpId)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ItemCategoryName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SignUpId)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@TempData["id"]" asp-route-edit="@item.ItemCategoryId">Edit</a> |
+                    
+                    <a asp-action="Delete" asp-route-id="@TempData["id"]" asp-route-delete="@item.ItemCategoryId">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

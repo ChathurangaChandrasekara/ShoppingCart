@@ -34,6 +34,7 @@ namespace ShoppingCart.Areas.Administration.Controllers
             LoginMessaageDTO loginobj =   _loginData.checkLogin(obj);
                 message = loginobj.Message;
                 string email = loginobj.Email;
+                int id = loginobj.Id;
                 ViewBag.message = message;
                 if (loginobj.LoginType== "Error")
                 {
@@ -45,7 +46,8 @@ namespace ShoppingCart.Areas.Administration.Controllers
                 }
                 else if (loginobj.LoginType == "Shop" && loginobj.Active== true)
                 {
-                    return RedirectToAction("Index", "Shop", new { area = "Shop", Id = email });
+                    
+                    return RedirectToAction("Index", "Shop", new { area = "Shop", Id = id });
                 }
                 else if (loginobj.LoginType == "Shop" && loginobj.Active == null)
                 {

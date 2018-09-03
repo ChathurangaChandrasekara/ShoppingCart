@@ -20,8 +20,10 @@ namespace ShoppingCart.Areas.Shop.Controllers
 
 
         // ******* View Shop Details ********
-        public ActionResult Index(string id)
+        [HttpGet]
+        public ActionResult Index(int id)
         {
+            TempData["id"] = id;
             return View(_shopData.ShopDetailId(id));
         }
 
@@ -33,9 +35,11 @@ namespace ShoppingCart.Areas.Shop.Controllers
             return View();
         }
 
-        // GET: Shop/Create
-        public ActionResult Create()
+        // *
+        
+        public ActionResult Create(int Id)
         {
+
             return View();
         }
 
@@ -58,7 +62,7 @@ namespace ShoppingCart.Areas.Shop.Controllers
 
         // GET: Shop/Edit/5
         [HttpGet]
-        public ActionResult Edit(string Email)
+        public ActionResult Edit(int id)
         {
             return View();
         }

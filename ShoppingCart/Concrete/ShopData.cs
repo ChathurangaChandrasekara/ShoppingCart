@@ -31,13 +31,10 @@ namespace ShoppingCart.Concrete
             
         }
 
-        public SignUpDTO ShopDetailId(string id)
+        public SignUpDTO ShopDetailId(int id)
         {
             SignUpDTO ViewSignUpShopData = new SignUpDTO();
-            int Id = _db.SignUps.Where(x => x.Email == id).Select(x => x.SignUpId).FirstOrDefault();
-            SignUp ShopSignUpData = _db.SignUps.Where(x => x.SignUpId == Id).FirstOrDefault();
-
-
+            SignUp ShopSignUpData = _db.SignUps.Where(x => x.SignUpId == id).FirstOrDefault();
 
             ViewSignUpShopData.FullName = ShopSignUpData.FullName;
             ViewSignUpShopData.Active = ShopSignUpData.Active;
