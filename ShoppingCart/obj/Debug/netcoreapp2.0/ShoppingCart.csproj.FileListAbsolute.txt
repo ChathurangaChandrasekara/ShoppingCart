@@ -99,4 +99,8 @@ E:\GitClone\ShoppingCart\ShoppingCart\obj\Debug\netcoreapp2.0\Razor\Areas\Shop\V
 E:\GitClone\ShoppingCart\ShoppingCart\obj\Debug\netcoreapp2.0\Razor\Areas\Shop\Views\ItemCategory\Edit.g.cshtml.cs
 E:\GitClone\ShoppingCart\ShoppingCart\obj\Debug\netcoreapp2.0\Razor\Areas\Shop\Views\ItemCategory\Delete.g.cshtml.cs
 E:\GitClone\ShoppingCart\ShoppingCart\obj\Debug\netcoreapp2.0\Razor\Areas\Shop\Views\ItemCategory\Create.g.cshtml.cs
+E:\GitClone\ShoppingCart\ShoppingCart\obj\Debug\netcoreapp2.0\Razor\Areas\Administration\Views\Admin\Create.g.cshtml.cs
+E:\GitClone\ShoppingCart\ShoppingCart\obj\Debug\netcoreapp2.0\Razor\Areas\Shop\Views\Shop\AddMoreDetail.g.cshtml.cs
+E:\GitClone\ShoppingCart\ShoppingCart\obj\Debug\netcoreapp2.0\Razor\Areas\Shop\Views\Shop\ShowAllDetail.g.cshtml.cs
+E:\GitClone\ShoppingCart\ShoppingCart\obj\Debug\netcoreapp2.0\Razor\Areas\Shop\Views\Shop\EditMoreDetail.g.cshtml.cs
 E:\GitClone\ShoppingCart\ShoppingCart\obj\Debug\netcoreapp2.0\ShoppingCart.csprojAssemblyReference.cache

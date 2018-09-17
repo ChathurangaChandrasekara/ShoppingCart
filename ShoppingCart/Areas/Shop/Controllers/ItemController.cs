@@ -1,14 +1,15 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using ShoppingCart.Abstract;
 using ShoppingCart.Areas.Shop.Models;
 using ShoppingCart.Models;
+
 
 namespace ShoppingCart.Areas.Shop.Controllers
 {
@@ -56,45 +57,80 @@ namespace ShoppingCart.Areas.Shop.Controllers
         // POST: Item/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(ItemDTO obj, IFormFile ImageUrl, int id)
+        public ActionResult Create(ItemDTO obj, List<IFormFile> ImageFile, int id)
         {
-            
-
-            if (ModelState.IsValid)
+            string fileName = Path.GetFileNameWithoutExtension(obj.ImageFile.ToString());
+            string extension = Path.GetExtension(obj.ImageFile.ToString());
+            fileName = fileName + extension;
+            var url = "/ItemImage" + fileName;
+            fileName = Path.Combine((url), fileName);
+            obj.ImageFile.Equals(fileName);
+            foreach (var FileUpload in ImageFile)
             {
-                //if (ImageUrl != null)
-                //
-                //    var ImagePath = Path.GetTempFileName();
-                //    if (ImageUrl.Length>0)
-                //    {
-                //        using (var stream = new FileStream(ImagePath, FileMode.Create))
-                //        {
-                //            ImageUrl.CopyTo(stream);
-                //        }
-                //    }
-                //var url = Path.Combine("~/AItem/" + obj.signUp.SignUpId + obj.itemCategory.ItemCategoryId + obj.ItemId);
-                //var directory = new DirectoryInfo(url);
+                if (FileUpload.Length > 0)
+                {
+                    using (var stream = new FileStream(fileName, FileMode.Create))
+                    {
+                        FileUpload.CopyToAsync(stream);
 
-                //if (directory.Exists == false)
-                //{
-                //    directory.Create();
-                //}
-
-                //using (var stream = new FileStream(url, FileMode.Create))
-                //{
-                //    ImageUrl.CopyTo(stream);
-                //}
-
-
-                //obj.ImageUrl =Convert.ToString(ImageUrl);
-                var itemcategoryid = HttpContext.Request.Form["ItemCategoryId"].ToString();
-                obj.ItemCategoryId = Convert.ToInt32(itemcategoryid);
-
-                _itemData.AddItem(obj);
-                    return RedirectToAction("ItemList", "Item", new { id = id});
-                
+                    }
+                }
             }
-            return View();
+            ////brrr
+            //if (ModelState.IsValid)
+            //{
+
+            //    long size = files.Sum(f => f.Length);
+
+            //    // full path to file in temp location
+            //    var filePath = Path.Combine()
+
+            //    foreach (var formFile in files)
+            //    {
+            //        if (formFile.Length > 0)
+            //        {
+            //            using (var stream = new FileStream(filePath, FileMode.Create))
+            //            {
+            //                await formFile.CopyToAsync(stream);
+            //            }
+
+            //        }
+
+            /////brrrrrrr
+            //if (ImageUrl != null)
+            //
+            // var ImagePath = Path.GetFileNameWithoutExtension();
+            //    if (ImageUrl.Length>0)
+            //    {
+            //        using (var stream = new FileStream(ImagePath, FileMode.Create))
+            //        {
+            //            ImageUrl.CopyTo(stream);
+            //        }
+            //    }
+            //var url = Path.Combine("~/AItem/" + obj.signUp.SignUpId + obj.itemCategory.ItemCategoryId + obj.ItemId);
+            //var directory = new DirectoryInfo(url);
+
+            //if (directory.Exists == false)
+            //{
+            //    directory.Create();
+            //}
+
+            //using (var stream = new FileStream(url, FileMode.Create))
+            //{
+            //    ImageUrl.CopyTo(stream);
+            //}
+
+
+            //obj.ImageUrl =Convert.ToString(ImageUrl);
+
+            var itemcategoryid = HttpContext.Request.Form["ItemCategoryId"].ToString();
+            obj.ItemCategoryId = Convert.ToInt32(itemcategoryid);
+
+            _itemData.AddItem(obj);
+             return RedirectToAction("ItemList", "Item", new { id = id});
+                
+            
+            
         }
 
         // GET: Item/Edit/5

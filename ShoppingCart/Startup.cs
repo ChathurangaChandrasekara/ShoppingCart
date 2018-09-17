@@ -10,6 +10,9 @@ using ShoppingCart.Models;
 using Microsoft.EntityFrameworkCore;
 using ShoppingCart.Abstract;
 using ShoppingCart.Concrete;
+using Microsoft.Extensions.FileProviders;
+using System.IO;
+using Microsoft.AspNetCore.Http;
 
 namespace ShoppingCart
 {
@@ -27,6 +30,10 @@ namespace ShoppingCart
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSingleton<IFileProvider>(
+               new PhysicalFileProvider(
+                   Path.Combine(Directory.GetCurrentDirectory(), "wwwroot")));
+
             services.AddTransient<IItemCategoryData, ItemCategoryData>();
             services.AddTransient<IItemData, ItemData>();
             services.AddTransient<IShopData, ShopData>();
@@ -51,6 +58,12 @@ namespace ShoppingCart
             }
 
             app.UseStaticFiles();
+
+            app.UseDirectoryBrowser(new DirectoryBrowserOptions()
+            {
+                FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot", "shopImages")),
+                RequestPath = new PathString("/shopImages")
+            });
 
             app.UseMvc(routes =>
             {

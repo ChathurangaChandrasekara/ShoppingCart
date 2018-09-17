@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using ShoppingCart.Abstract;
 using ShoppingCart.Areas.Administration.Models;
 
@@ -88,10 +89,10 @@ namespace ShoppingCart.Areas.Administration.Controllers
                    
                     _loginData.setAllLoginData(obj);
                 }
-                catch (Exception ex)
+                catch (DbUpdateConcurrencyException e)
                 {
 
-                    throw;
+                    throw new Exception($"Sign up doesn't occure", e );
                 }
             }
             return View();

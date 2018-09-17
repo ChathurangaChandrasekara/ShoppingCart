@@ -9,14 +9,16 @@ namespace ShoppingCart.Areas.Shop.Models
 {
     public class MoreDetailDTO
     {
-        
-       
+
+        [Key]
         public int MoreDetailId { get; set; }
+
         public string AdditionPhoneNumber { get; set; }
         public string AdditionAddress { get; set; }
         public string Location { get; set; }
         public string ImageUrl { get; set; }
 
-        public SignUp signUp { get; set; }
+        public SignUp signUp;
+        public int SignUpId { get; set; }
     }
 }

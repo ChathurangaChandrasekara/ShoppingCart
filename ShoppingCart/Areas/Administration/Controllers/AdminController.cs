@@ -11,10 +11,12 @@ namespace ShoppingCart.Areas.Administration.Controllers
 {
     public class AdminController : Controller
     {
+        public ILoginData _loginData;
         public IAdminData _adminData;
-        public AdminController(IAdminData adminData)
+        public AdminController(IAdminData adminData,ILoginData loginData)
         {
             _adminData = adminData;
+            _loginData = loginData;
         }
 
 
@@ -166,28 +168,44 @@ namespace ShoppingCart.Areas.Administration.Controllers
         //    }
         //}
 
-        //// GET: Admin/Edit/5
-        //public ActionResult Edit(int id)
-        //{
-        //    return View();
-        //}
+        // GET: Admin/Edit/5
+        [HttpGet]
+        public ActionResult Create(int id)
+        {
+            return View();
+        }
 
-        //// POST: Admin/Edit/5
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Edit(int id, IFormCollection collection)
-        //{
-        //    try
-        //    {
-        //        // TODO: Add update logic here
+        // POST: Admin/Edit/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(SignUpDTO obj, IFormCollection collection)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _loginData.setAllLoginData(obj);
+                    if (obj.LoginType=="Shop" && obj.Active==true)
+                    {
+                        return RedirectToAction("Active", "Admin");
+                    }
+                    else if (obj.LoginType == "Shop" && obj.Active == null || false)
+                    {
+                        return RedirectToAction("PendingShop", "Admin");
+                    }
+                    else if(obj.LoginType == "User")
+                    {
+                        return RedirectToAction("GetUser", "Admin");
+                    }
 
-        //        return RedirectToAction(nameof(Index));
-        //    }
-        //    catch
-        //    {
-        //        return View();
-        //    }
-        //}
+                }
+                catch(Exception ex)
+                {
+                    throw;
+                }
+            }
+            return View();
+        }
 
         // Delete details 
         public ActionResult Delete(int id)

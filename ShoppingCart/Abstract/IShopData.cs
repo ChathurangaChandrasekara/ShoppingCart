@@ -10,6 +10,11 @@ namespace ShoppingCart.Abstract
     public interface IShopData
     {
         SignUpDTO ShopDetailId(int id);
-        void EditAllShopDetail(MoreDetailDTO obj);
+        void AddMoreShopDetail(MoreDetailDTO obj);
+
+        AllDataDTO MoreDetailId(int id);
+        void EditedDetail(AllDataDTO obj);
+
+        AllDataDTO ShowAllDetail(int id);
     }
 }

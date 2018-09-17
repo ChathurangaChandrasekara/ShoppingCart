@@ -94,6 +94,7 @@ namespace ShoppingCart.Concrete
 
         public void setAllLoginData(SignUpDTO signobj)
         {
+            
             try
             {
                 SignUp obj = new SignUp();

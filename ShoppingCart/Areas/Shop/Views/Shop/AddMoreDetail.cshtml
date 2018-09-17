@@ -1,0 +1,51 @@
+﻿@model ShoppingCart.Areas.Shop.Models.MoreDetailDTO
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    ViewData["Title"] = "AddMoreDetail";
+    Layout = "_ShopLayout";
+}
+<script src="~/js/myjsfile.js"></script>
+<h2>AddMoreDetail</h2>
+
+<h4>MoreDetailDTO</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="AddMoreDetail" asp-controller="Shop" method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="AdditionPhoneNumber" class="control-label"></label>
+                <input asp-for="AdditionPhoneNumber" class="form-control" />
+                <span asp-validation-for="AdditionPhoneNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AdditionAddress" class="control-label"></label>
+                <input asp-for="AdditionAddress" class="form-control" />
+                <span asp-validation-for="AdditionAddress" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Location" class="control-label"></label>
+                <input asp-for="Location" class="form-control" />
+                <span asp-validation-for="Location" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ImageUrl" class="control-label"></label>
+                <input type="file" id="files" name="files" asp-for="ImageUrl" class="form-control" multiple onchange="fileupload('files');" />
+
+            </div>
+            <div class="form-group">
+               
+                <input type="hidden" value="@TempData["id"]" asp-for="SignUpId" class="form-control" />
+
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index" asp-controller="Shop" asp-route-id="@TempData["id"]">Back to List</a>
+</div>
+

@@ -17,16 +17,17 @@ namespace ShoppingCart.Concrete
             _db = db;
         }
 
-        public void EditAllShopDetail(MoreDetailDTO obj)
+        public void AddMoreShopDetail(MoreDetailDTO obj)
         {
-            MoreDetail SaveMoreDetail = _db.MoreDetails.Where(x => x.MoreDetailId == obj.MoreDetailId).FirstOrDefault();
+            MoreDetail SaveMoreDetail = new MoreDetail();
+
             SaveMoreDetail.AdditionAddress = obj.AdditionAddress;
             SaveMoreDetail.AdditionPhoneNumber = obj.AdditionPhoneNumber;
             SaveMoreDetail.ImageUrl = obj.ImageUrl;
             SaveMoreDetail.Location = obj.Location;
-            SaveMoreDetail.MoreDetailId = obj.MoreDetailId;
+            SaveMoreDetail.SignUpId = obj.SignUpId;
 
-            _db.Entry(SaveMoreDetail).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            _db.MoreDetails.Add(SaveMoreDetail);
             _db.SaveChanges();
             
         }
@@ -47,8 +48,69 @@ namespace ShoppingCart.Concrete
 
 
             return ViewSignUpShopData;
+        }
+
+        public AllDataDTO MoreDetailId(int id)
+        {
+            SignUp SData = _db.SignUps.Where(x => x.SignUpId == id).FirstOrDefault();
+            MoreDetail Mdata = _db.MoreDetails.Where(x => x.SignUpId == id).FirstOrDefault();
+            AllDataDTO AllData = new AllDataDTO();
+
+            AllData.FullName = SData.FullName;
+            AllData.Address = SData.Address;
+            AllData.Email = SData.Email;
+            AllData.PhoneNumber = SData.PhoneNumber;
+            AllData.LoginType = SData.LoginType;
+            AllData.AdditionAddress = Mdata.AdditionAddress;
+            AllData.AdditionPhoneNumber = Mdata.AdditionPhoneNumber;
+            AllData.Location = Mdata.Location;
+            AllData.ImageUrl = Mdata.ImageUrl;
+            AllData.MoreDetailId = Mdata.MoreDetailId;
+            AllData.SignUpId = Mdata.SignUpId;
 
 
+            return AllData;
+        }
+
+        public void EditedDetail(AllDataDTO obj)  //how to save data into 2 table from one view
+        {
+            SignUp SData = _db.SignUps.Where(x => x.SignUpId == obj.SignUpId).FirstOrDefault();
+            MoreDetail Mdata = _db.MoreDetails.Where(x => x.SignUpId == obj.SignUpId).FirstOrDefault();
+            AllDataDTO AllData = new AllDataDTO();
+
+            SData.FullName = AllData.FullName;
+            SData.Address = AllData.Address;
+            SData.Email = AllData.Email;
+            SData.PhoneNumber = AllData.PhoneNumber;
+            SData.LoginType = AllData.LoginType;
+            Mdata.AdditionAddress = AllData.AdditionAddress;
+            Mdata.AdditionPhoneNumber = AllData.AdditionPhoneNumber;
+            Mdata.Location = AllData.Location;
+            Mdata.ImageUrl = AllData.ImageUrl;
+
+            _db.SignUps.Update(SData);
+            _db.MoreDetails.Update(Mdata); //.State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            _db.SaveChanges();
+        }
+
+        public AllDataDTO ShowAllDetail(int id)
+        {
+            SignUp SData = _db.SignUps.Where(x => x.SignUpId == id).FirstOrDefault();
+            MoreDetail Mdata = _db.MoreDetails.Where(x => x.SignUpId==id ).FirstOrDefault();
+            AllDataDTO AllData = new AllDataDTO();
+
+            AllData.FullName = SData.FullName;
+            AllData.Address = SData.Address;
+            AllData.Email = SData.Email;
+            AllData.PhoneNumber = SData.PhoneNumber;
+            AllData.LoginType = SData.LoginType;
+            AllData.AdditionAddress = Mdata.AdditionAddress;
+            AllData.AdditionPhoneNumber = Mdata.AdditionPhoneNumber;
+            AllData.Location = Mdata.Location;
+            AllData.ImageUrl = Mdata.ImageUrl;
+            AllData.MoreDetailId = Mdata.MoreDetailId;
+            AllData.SignUpId = Mdata.SignUpId;
+            return AllData;
         }
     }
 }

@@ -1,0 +1,87 @@
+﻿@model ShoppingCart.Areas.Shop.Models.AllDataDTO
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    ViewData["Title"] = "EditMoreDetail";
+    Layout = "_ShopLayout";
+}
+
+<h2>EditMoreDetail</h2>
+
+<h4>AllDataDTO</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="EditMoreDetail" asp-controller="Shop" method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="SignUpId" />
+            <div class="form-group">
+                <label asp-for="FullName" class="control-label"></label>
+                <input asp-for="FullName" class="form-control" />
+                <span asp-validation-for="FullName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Address" class="control-label"></label>
+                <input asp-for="Address" class="form-control" />
+                <span asp-validation-for="Address" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PhoneNumber" class="control-label"></label>
+                <input asp-for="PhoneNumber" class="form-control" />
+                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+
+                <input type="hidden" asp-for="Password" class="form-control" />
+
+            </div>
+            <div class="form-group">
+                
+                <input type="hidden" asp-for="Active" class="form-control" />
+               
+            </div>
+            <div class="form-group">
+                <label asp-for="LoginType" class="control-label"></label>
+                <input asp-for="LoginType" class="form-control" />
+                <span asp-validation-for="LoginType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+
+                <input type="hidden" asp-for="MoreDetailId" class="form-control" />
+
+            </div>
+            <div class="form-group">
+                <label asp-for="AdditionPhoneNumber" class="control-label"></label>
+                <input asp-for="AdditionPhoneNumber" class="form-control" />
+                <span asp-validation-for="AdditionPhoneNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AdditionAddress" class="control-label"></label>
+                <input asp-for="AdditionAddress" class="form-control" />
+                <span asp-validation-for="AdditionAddress" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Location" class="control-label"></label>
+                <input asp-for="Location" class="form-control" />
+                <span asp-validation-for="Location" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <img src="~/shopImages/@Model.SignUpId/images/@Model.ImageUrl" alt="error" width="200" height="300" />
+                <input type="file" name="files" asp-for="ImageUrl" class="form-control" />
+
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index" asp-route-id="@Model.SignUpId">Back to List</a>
+</div>
+
