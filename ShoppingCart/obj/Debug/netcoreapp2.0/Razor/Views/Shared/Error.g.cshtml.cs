@@ -14,7 +14,7 @@ namespace AspNetCore
     using Microsoft.AspNetCore.Mvc.Rendering;
     using Microsoft.AspNetCore.Mvc.ViewFeatures;
 #line 1 "E:\GitClone\ShoppingCart\ShoppingCart\Views\_ViewImports.cshtml"
-using ShoppingCart;
+using ShoppingCart.ViewModels;
 
 #line default
 #line hidden
@@ -23,8 +23,13 @@ using ShoppingCart.Models;
 
 #line default
 #line hidden
+#line 3 "E:\GitClone\ShoppingCart\ShoppingCart\Views\_ViewImports.cshtml"
+using ShoppingCart.Areas.Administration.Models;
+
+#line default
+#line hidden
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"583387379a597938339285f5a623245873b0a91c", @"/Views/Shared/Error.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"98ce892cc7a704c0273e63b505cf6469481f99a3", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"1c9ea21f2441d269cba426f70051011ca1606ff4", @"/Views/_ViewImports.cshtml")]
     public class Views_Shared_Error : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<ErrorViewModel>
     {
         #pragma warning disable 1998

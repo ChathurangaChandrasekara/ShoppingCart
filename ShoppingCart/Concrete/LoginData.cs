@@ -42,6 +42,7 @@ namespace ShoppingCart.Concrete
                 }
                 else
                 {
+                    msgObj.Id = Id;
                     msgObj.Email = loginobj.Email;
                     msgObj.Message = "Admin login";
                     msgObj.LoginType = "Admin";

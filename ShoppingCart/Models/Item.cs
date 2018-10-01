@@ -13,7 +13,10 @@ namespace ShoppingCart.Models
 
         public string ItemName { get; set; }
         public string ItemCode { get; set; }
-        public string ImageUrl { get; set; }
+        public string ImageUrl1 { get; set; }
+        public string ImageUrl2 { get; set; }
+        public string ImageUrl3 { get; set; }
+        public string ImageUrl4 { get; set; }
         public int UnitPrice { get; set; }
         public int Quantity { get; set; }
         public string Description { get; set; }

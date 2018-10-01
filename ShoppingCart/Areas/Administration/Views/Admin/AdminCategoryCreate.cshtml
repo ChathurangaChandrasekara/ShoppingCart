@@ -1,0 +1,36 @@
+﻿@model ShoppingCart.Areas.Shop.Models.ItemCategoryDTO
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    ViewData["Title"] = "AdminCategoryCreate";
+    Layout = "_AdminLayout";
+}
+
+<h2>AdminCategoryCreate</h2>
+
+<h4>ItemCategoryDTO</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="AdminCategoryCreate">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="ItemCategoryName" class="control-label"></label>
+                <input asp-for="ItemCategoryName" class="form-control" />
+                <span asp-validation-for="ItemCategoryName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                
+                <input type="hidden" value="@TempData["id"]" asp-for="SignUpId" class="form-control" />
+                <span asp-validation-for="SignUpId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="AdminCategoryList" asp-route-id="@TempData["id"]">Back to List</a>
+</div>
+

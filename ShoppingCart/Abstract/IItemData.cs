@@ -17,5 +17,7 @@ namespace ShoppingCart.Abstract
 
         ItemDTO GetDeleteItem(int id);
         void Delete(int id);
+
+        ItemDTO Details(int id);
     }
 }

@@ -5,33 +5,27 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using ShoppingCart.Models;
+using ShoppingCart.ViewModels;
 
 namespace ShoppingCart.Controllers
 {
     public class HomeController : Controller
     {
-        public IActionResult Index()
+        ShoppingCartDbContext _db;
+        public HomeController(ShoppingCartDbContext db)
         {
-            return View();
+            _db = db;
+        }
+        public ActionResult Index()
+        {
+            HomeViewModel homeViewModel = new HomeViewModel();
+            homeViewModel.ShopList = _db.SignUps.Where(x => x.LoginType == "Shop" & x.Active == true).ToList();
+
+            //homeViewModel.ItemList1 = _db.Items
+
+            return View(homeViewModel);
         }
 
-        public IActionResult About()
-        {
-            ViewData["Message"] = "Your application description page.";
-
-            return View();
-        }
-
-        public IActionResult Contact()
-        {
-            ViewData["Message"] = "Your contact page.";
-
-            return View();
-        }
-
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
+       
     }
 }

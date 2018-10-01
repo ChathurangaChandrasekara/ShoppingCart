@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ShoppingCart.Abstract;
 using ShoppingCart.Areas.Shop.Models;
+using ShoppingCart.Models;
 
 namespace ShoppingCart.Areas.Shop.Controllers
 {
@@ -45,7 +46,6 @@ namespace ShoppingCart.Areas.Shop.Controllers
             {
                 try
                 {
-
                     _itemCategoryData.Created(obj);
                     return RedirectToAction("Index", "ItemCategory", new { id = id});
                 }
@@ -72,13 +72,10 @@ namespace ShoppingCart.Areas.Shop.Controllers
         {
             if (ModelState.IsValid)
             {
-
-
                 try
                 {
-
                     _itemCategoryData.Edited(obj);
-                    return RedirectToAction("Index", "ItemCategory", new { id = id });
+                     return RedirectToAction("Index", "ItemCategory", new { id = id });
                 }
                 catch
                 {
@@ -106,7 +103,6 @@ namespace ShoppingCart.Areas.Shop.Controllers
             
             try
                 {
-
                     _itemCategoryData.Deleted(ItemCategoryId, SignUpId);
                     return RedirectToAction("Index", "ItemCategory", new { id = SignUpId});
                 }
@@ -115,7 +111,7 @@ namespace ShoppingCart.Areas.Shop.Controllers
                     throw;
                 }
            
-            return View();
+           
         }
     }
 }

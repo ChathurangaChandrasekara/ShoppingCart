@@ -14,17 +14,27 @@ namespace AspNetCore
     using Microsoft.AspNetCore.Mvc.Rendering;
     using Microsoft.AspNetCore.Mvc.ViewFeatures;
 #line 1 "E:\GitClone\ShoppingCart\ShoppingCart\Areas\Administration\Views\_ViewImports.cshtml"
-using ShoppingCart;
+using ShoppingCart.Areas.Shop.Models;
 
 #line default
 #line hidden
 #line 2 "E:\GitClone\ShoppingCart\ShoppingCart\Areas\Administration\Views\_ViewImports.cshtml"
+using ShoppingCart.Areas.Administration.Models;
+
+#line default
+#line hidden
+#line 3 "E:\GitClone\ShoppingCart\ShoppingCart\Areas\Administration\Views\_ViewImports.cshtml"
 using ShoppingCart.Models;
 
 #line default
 #line hidden
+#line 4 "E:\GitClone\ShoppingCart\ShoppingCart\Areas\Administration\Views\_ViewImports.cshtml"
+using ShoppingCart.Areas.Administration.ViewModels;
+
+#line default
+#line hidden
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"29b79f8be298f90cc8f08f9187e76e9404ac39e0", @"/Areas/Administration/Views/Admin/PendingShop.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"98ce892cc7a704c0273e63b505cf6469481f99a3", @"/Areas/Administration/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"573866b2b77065216627ba3394e59d1d3e8b85e0", @"/Areas/Administration/Views/_ViewImports.cshtml")]
     public class Areas_Administration_Views_Admin_PendingShop : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<IEnumerable<ShoppingCart.Areas.Administration.Models.SignUpDTO>>
     {
         private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_0 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("asp-action", "Create", global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
@@ -73,7 +83,7 @@ using ShoppingCart.Models;
             WriteLiteral("\r\n<h2>PendingShop</h2>\r\n\r\n<p>\r\n    ");
             EndContext();
             BeginContext(205, 37, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "4e87b163648e4768b7c295d7636c3447", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "7d5ead3f3e244b92b1b7a30524785d66", async() => {
                 BeginContext(228, 10, true);
                 WriteLiteral("Create New");
                 EndContext();
@@ -95,7 +105,7 @@ using ShoppingCart.Models;
             WriteLiteral("\r\n</p>\r\n\r\n");
             EndContext();
             BeginContext(252, 228, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "dbd5e64064a74f8885dbb9bc5426f9d7", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "22eb56c4fae94c16b6c9f6ab5de58e2d", async() => {
                 BeginContext(346, 127, true);
                 WriteLiteral("\r\n    <input type=\"text\" name=\"search\" class=\"form-control\" />\r\n    <button type=\"submit\" class=\"btn-default\">Search</button>\r\n");
                 EndContext();
@@ -274,7 +284,7 @@ using ShoppingCart.Models;
             WriteLiteral("\r\n                </td>\r\n                <td>\r\n                    ");
             EndContext();
             BeginContext(2179, 93, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "b8bc9d6d60d348c4be2a93e5b7e752f5", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "b907b02716ae4f0ea52895b892d41d21", async() => {
                 BeginContext(2264, 4, true);
                 WriteLiteral("Edit");
                 EndContext();
@@ -311,7 +321,7 @@ using ShoppingCart.Models;
             WriteLiteral(" |\r\n                    ");
             EndContext();
             BeginContext(2296, 65, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "caa59f88887245f991569af380cb8910", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "ab7de719f61e42a28d1ff871634a9405", async() => {
                 BeginContext(2350, 7, true);
                 WriteLiteral("Details");
                 EndContext();
@@ -346,7 +356,7 @@ using ShoppingCart.Models;
             WriteLiteral(" |\r\n                    ");
             EndContext();
             BeginContext(2385, 86, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "30b62c4731ce459abc2e1d25a56ad104", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "41180c8638a7455eb54e44ef5d35b22f", async() => {
                 BeginContext(2461, 6, true);
                 WriteLiteral("Delete");
                 EndContext();

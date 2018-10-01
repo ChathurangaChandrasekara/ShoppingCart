@@ -19,6 +19,52 @@ namespace ShoppingCart.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("ShoppingCart.Areas.Administration.Models.SignUpDTO", b =>
+                {
+                    b.Property<int>("SignUpId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool?>("Active");
+
+                    b.Property<string>("Address")
+                        .IsRequired();
+
+                    b.Property<string>("Email")
+                        .IsRequired();
+
+                    b.Property<string>("FullName")
+                        .IsRequired();
+
+                    b.Property<string>("LoginType");
+
+                    b.Property<string>("Password")
+                        .IsRequired();
+
+                    b.Property<string>("PhoneNumber")
+                        .IsRequired()
+                        .HasMaxLength(10);
+
+                    b.HasKey("SignUpId");
+
+                    b.ToTable("SignUpDTO");
+                });
+
+            modelBuilder.Entity("ShoppingCart.Areas.Shop.Models.ItemCategoryDTO", b =>
+                {
+                    b.Property<int>("ItemCategoryId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ItemCategoryName");
+
+                    b.Property<int>("SignUpId");
+
+                    b.HasKey("ItemCategoryId");
+
+                    b.ToTable("ItemCategoryDTO");
+                });
+
             modelBuilder.Entity("ShoppingCart.Models.Item", b =>
                 {
                     b.Property<int>("ItemId")
@@ -27,7 +73,13 @@ namespace ShoppingCart.Migrations
 
                     b.Property<string>("Description");
 
-                    b.Property<string>("ImageUrl");
+                    b.Property<string>("ImageUrl1");
+
+                    b.Property<string>("ImageUrl2");
+
+                    b.Property<string>("ImageUrl3");
+
+                    b.Property<string>("ImageUrl4");
 
                     b.Property<int>("ItemCategoryId");
 
@@ -82,6 +134,25 @@ namespace ShoppingCart.Migrations
                     b.ToTable("MoreDetails");
                 });
 
+            modelBuilder.Entity("ShoppingCart.Models.ShoppingCartItem", b =>
+                {
+                    b.Property<int>("ShoppingCartItemId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("Amount");
+
+                    b.Property<int?>("ItemId");
+
+                    b.Property<string>("ShoppingCartId");
+
+                    b.HasKey("ShoppingCartItemId");
+
+                    b.HasIndex("ItemId");
+
+                    b.ToTable("ShoppingCartItems");
+                });
+
             modelBuilder.Entity("ShoppingCart.Models.SignUp", b =>
                 {
                     b.Property<int>("SignUpId")
@@ -111,6 +182,13 @@ namespace ShoppingCart.Migrations
                     b.HasKey("SignUpId");
 
                     b.ToTable("SignUps");
+                });
+
+            modelBuilder.Entity("ShoppingCart.Models.ShoppingCartItem", b =>
+                {
+                    b.HasOne("ShoppingCart.Models.Item", "item")
+                        .WithMany()
+                        .HasForeignKey("ItemId");
                 });
 #pragma warning restore 612, 618
         }

@@ -6,23 +6,27 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ShoppingCart.Abstract;
 using ShoppingCart.Areas.Administration.Models;
+using ShoppingCart.Areas.Shop.Models;
 
 namespace ShoppingCart.Areas.Administration.Controllers
 {
     public class AdminController : Controller
     {
-        public ILoginData _loginData;
-        public IAdminData _adminData;
-        public AdminController(IAdminData adminData,ILoginData loginData)
+        ILoginData _loginData;
+        IAdminData _adminData;
+        IItemCategoryData _itemCategoryData;
+        public AdminController(IAdminData adminData,ILoginData loginData, IItemCategoryData itemCategoryData)
         {
+            _itemCategoryData = itemCategoryData;
             _adminData = adminData;
             _loginData = loginData;
         }
 
 
         // GET: Admin
-        public ActionResult Index()
+        public ActionResult Index(int id)
         {
+            TempData["id"] = id;
             return View();
         }
 
@@ -227,6 +231,94 @@ namespace ShoppingCart.Areas.Administration.Controllers
             {
                 return View();
             }
+        }
+
+        //Admin Can Access to All Category 
+        public ActionResult AdminCategoryList(int id)
+        {
+            TempData["id"] = id;
+            return View(_itemCategoryData.AdminShowList());
+        }
+
+        public ActionResult AdminCategoryCreate(int id)
+        {
+            TempData["id"] = id;
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AdminCategoryCreate(ItemCategoryDTO obj, int id)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _itemCategoryData.Created(obj);
+                    return RedirectToAction("AdminCategoryList", "Admin", new { id = id });
+                }
+                catch
+                {
+                    throw;
+                }
+            }
+            return View();
+        }
+
+        // GET: ItemCategory/Edit/5
+        [HttpGet]
+        public ActionResult AdminCategoryEdit(int edit, int id)
+        {
+            TempData["id"] = id;
+            return View(_itemCategoryData.EditById(edit));
+        }
+
+        // POST: ItemCategory/Edit/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AdminCategoryEdit(ItemCategoryDTO obj, int id)
+        {
+            TempData["id"] = id;
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _itemCategoryData.Edited(obj);
+                    return RedirectToAction("AdminCategoryList", "Admin", new { id = id });
+                }
+                catch
+                {
+                    throw;
+                }
+            }
+            return View();
+        }
+
+        //Delete Category///////////////
+        [HttpGet]
+        public ActionResult AdminCategoryDelete(int delete, int id)
+        {
+            TempData["delete"] = delete;
+            TempData["id"] = id;
+            return View(_itemCategoryData.DeleteById(delete, id));
+        }
+
+        // POST: ItemCategory/Delete/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [ActionName("AdminCategoryDelete")]
+        public ActionResult DeleteDAdminCategoryDeleteData(int ItemCategoryId, int SignUpId)
+        {
+            try
+            {
+                _itemCategoryData.Deleted(ItemCategoryId, SignUpId);
+                    return RedirectToAction("AdminCategoryList", "Admin", new { id = SignUpId });
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+
+
         }
     }
 }

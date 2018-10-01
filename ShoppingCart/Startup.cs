@@ -39,7 +39,14 @@ namespace ShoppingCart
             services.AddTransient<IShopData, ShopData>();
             services.AddTransient<IAdminData, AdminData>();
             services.AddTransient<ILoginData, LoginData>();
+            services.AddTransient<ICartData, CartData>();
+
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddScoped(sp => CartData.GetCart(sp));
+
             services.AddMvc();
+            services.AddMemoryCache();
+            services.AddSession();
             var connection = @"Server=CJ\SQLEXPRESS;Database=ShoppingCartDb;Trusted_Connection=True;ConnectRetryCount=0";
             services.AddDbContext<ShoppingCartDbContext>(options => options.UseSqlServer(connection));
         }
@@ -58,13 +65,13 @@ namespace ShoppingCart
             }
 
             app.UseStaticFiles();
-
+            app.UseSession();
             app.UseDirectoryBrowser(new DirectoryBrowserOptions()
             {
                 FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot", "shopImages")),
                 RequestPath = new PathString("/shopImages")
             });
-
+            
             app.UseMvc(routes =>
             {
                 routes.MapRoute(

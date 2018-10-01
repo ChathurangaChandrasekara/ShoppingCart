@@ -23,7 +23,10 @@ namespace ShoppingCart.Concrete
 
             AddItemDetails.ItemName = obj.ItemName;
             AddItemDetails.ItemCode = obj.ItemCode;
-            AddItemDetails.ImageUrl = obj.ImageUrl;
+            AddItemDetails.ImageUrl1 = obj.ImageUrl1;
+            AddItemDetails.ImageUrl2 = obj.ImageUrl2;
+            AddItemDetails.ImageUrl3 = obj.ImageUrl3;
+            AddItemDetails.ImageUrl4 = obj.ImageUrl4;
             AddItemDetails.Description = obj.Description;
             AddItemDetails.Quantity = obj.Quantity;
             AddItemDetails.UnitPrice = obj.UnitPrice;
@@ -42,7 +45,7 @@ namespace ShoppingCart.Concrete
             Item GetItemDetailId = _db.Items.Where(x => x.ItemId == id).FirstOrDefault();
 
             GetItemDetail.Description = GetItemDetailId.Description;
-            GetItemDetail.ImageUrl = GetItemDetailId.ImageUrl;
+            GetItemDetail.ImageUrl1 = GetItemDetailId.ImageUrl1;
             GetItemDetail.itemCategory = GetItemDetailId.itemCategory;
             GetItemDetail.ItemCode = GetItemDetailId.ItemCode;
             GetItemDetail.ItemId = GetItemDetailId.ItemId;
@@ -58,7 +61,7 @@ namespace ShoppingCart.Concrete
             Item EditedItemDetail = _db.Items.Where(x => x.signUp.SignUpId == obj.signUp.SignUpId).FirstOrDefault();
 
             EditedItemDetail.Description = obj.Description;
-            EditedItemDetail.ImageUrl = obj.ImageUrl;
+            EditedItemDetail.ImageUrl1 = obj.ImageUrl1;
             EditedItemDetail.itemCategory = obj.itemCategory;
             EditedItemDetail.ItemCode = obj.ItemCode;
             EditedItemDetail.ItemId = obj.ItemId;
@@ -80,13 +83,15 @@ namespace ShoppingCart.Concrete
                 ItemDTO obj = new ItemDTO();
 
                 obj.Description = item.Description;
-                obj.ImageUrl = item.ImageUrl;
+                obj.ImageUrl1 = item.ImageUrl1;
                 obj.itemCategory = item.itemCategory;
                 obj.ItemCode = item.ItemCode;
                 obj.ItemId = item.ItemId;
                 obj.ItemName = item.ItemName;
                 obj.Quantity = item.Quantity;
                 obj.UnitPrice = item.UnitPrice;
+                obj.SignUpId = item.SignUpId;
+                obj.ItemCategoryId = item.ItemCategoryId;
                 
 
                 ItemList.Add(obj);
@@ -100,7 +105,7 @@ namespace ShoppingCart.Concrete
             ItemDTO GetItemDTO = new ItemDTO();
 
             GetItemDTO.Description = GetItem.Description;
-            GetItemDTO.ImageUrl = GetItem.ImageUrl;
+            GetItemDTO.ImageUrl1 = GetItem.ImageUrl1;
             GetItemDTO.itemCategory = GetItem.itemCategory;
             GetItemDTO.ItemCode = GetItem.ItemCode;
             GetItemDTO.ItemId = GetItem.ItemId;
@@ -118,5 +123,22 @@ namespace ShoppingCart.Concrete
             _db.Entry(DeleteItem).State = Microsoft.EntityFrameworkCore.EntityState.Deleted;
             _db.SaveChanges();
         }
+
+        public ItemDTO Details(int id)
+        {
+            Item getItem = _db.Items.Where(x => x.ItemId == id).FirstOrDefault();
+            ItemDTO obj = new ItemDTO();
+            obj.Description = getItem.Description;
+            //obj.ImageFile = getItem.i;
+            obj.ImageUrl1 = getItem.ImageUrl1;
+            obj.ItemCategoryId = getItem.ItemCategoryId;
+            obj.ItemCode = getItem.ItemCode;
+            obj.ItemId = getItem.ItemId;
+            obj.ItemName = getItem.ItemName;
+            obj.Quantity = getItem.Quantity;
+            obj.UnitPrice = getItem.UnitPrice;
+            return obj;
+        }
     }
+
 }

@@ -1,0 +1,84 @@
+﻿@model ShoppingCart.Areas.Shop.Models.ItemDTO
+
+@{
+    ViewData["Title"] = "ItemDetail";
+}
+
+<h2>ItemDetail</h2>
+
+<div>
+    <h4>ItemDTO</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ItemName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ItemName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ItemCode)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ItemCode)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ImageUrl1)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ImageUrl1)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ImageUrl2)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ImageUrl2)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ImageUrl3)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ImageUrl3)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ImageUrl4)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ImageUrl4)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.UnitPrice)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.UnitPrice)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Quantity)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Quantity)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ItemCategoryId)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ItemCategoryId)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.SignUpId)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.SignUpId)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.ItemId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

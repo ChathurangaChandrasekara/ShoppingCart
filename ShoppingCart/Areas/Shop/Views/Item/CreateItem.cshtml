@@ -1,0 +1,82 @@
+﻿@model ShoppingCart.Areas.Shop.Models.ItemDTO
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    ViewData["Title"] = "CreateItem";
+    Layout = "_ShopLayout";
+}
+
+<h2>CreateItem</h2>
+
+<h4>ItemDTO</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="CreateItem" asp-controller="Item" method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="ItemName" class="control-label"></label>
+                <input asp-for="ItemName" class="form-control" />
+                <span asp-validation-for="ItemName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ItemCode" class="control-label"></label>
+                <input asp-for="ItemCode" class="form-control" />
+                <span asp-validation-for="ItemCode" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ImageUrl1" class="control-label"></label>
+                <input type="file" id="files" name="files1" asp-for="ImageUrl1" class="form-control" />
+                <span asp-validation-for="ImageUrl1" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ImageUrl2" class="control-label"></label>
+                <input type="file" id="files" name="files2" asp-for="ImageUrl2" class="form-control"  onchange="fileupload('files');" />
+                <span asp-validation-for="ImageUrl2" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ImageUrl3" class="control-label"></label>
+                <input type="file" id="files" name="files3" asp-for="ImageUrl3" class="form-control"  onchange="fileupload('files');" />
+                <span asp-validation-for="ImageUrl3" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ImageUrl4" class="control-label"></label>
+                <input type="file" id="files" name="files4" asp-for="ImageUrl4" class="form-control"  onchange="fileupload('files');" />
+                <span asp-validation-for="ImageUrl4" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UnitPrice" class="control-label"></label>
+                <input asp-for="UnitPrice" class="form-control" />
+                <span asp-validation-for="UnitPrice" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Quantity" class="control-label"></label>
+                <input asp-for="Quantity" class="form-control" />
+                <span asp-validation-for="Quantity" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="itemCategory" class="control-label"></label>
+                
+                <select asp-for="ItemCategoryId" class="form-control" asp-items="@(new SelectList(ViewBag.ListItemCategory, "ItemCategoryId","ItemCategoryName"))"></select>
+                
+            </div>
+            <div class="form-group">
+                
+                <input type="hidden" value="@TempData["id"]" asp-for="SignUpId" class="form-control" />
+               
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="ItemList" asp-route-id="@TempData["id"]">Back to List</a>
+</div>
+

@@ -9,27 +9,29 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using ShoppingCart.Abstract;
 using ShoppingCart.Areas.Shop.Models;
 using ShoppingCart.Models;
-
+using System.Net.Http.Headers;
+using Microsoft.AspNetCore.Hosting;
 
 namespace ShoppingCart.Areas.Shop.Controllers
 {
     public class ItemController : Controller
     {
         ShoppingCartDbContext _db;
-        
-        
+        private IHostingEnvironment _hostingEnvironment;
+
         public IItemData _itemData;
-        public ItemController(IItemData itemData, ShoppingCartDbContext db)
+        public ItemController(IItemData itemData, ShoppingCartDbContext db, IHostingEnvironment hostingEnvironment)
         {
             _itemData = itemData;
             _db = db;
-
+            _hostingEnvironment = hostingEnvironment;
 
         }
         // GET: Item
-        public ActionResult Index()
+        public ActionResult ItemDetail(int id)
         {
-            return View();
+
+            return View(_itemData.Details(id));
         }
 
         // GET: Item/Details/5
@@ -42,95 +44,160 @@ namespace ShoppingCart.Areas.Shop.Controllers
 
         //******** item create  ********
         [HttpGet]
-        public ActionResult Create(int id)
+        public ActionResult CreateItem(int id)
         {
             TempData["id"] = id;
             List<ItemCategory> itemCategorieslist = new List<ItemCategory>();
-            itemCategorieslist = (from itemcategory in _db.ItemCategories.Where(x=> x.SignUpId == id) select itemcategory).ToList();
+            itemCategorieslist = (from itemcategory in _db.ItemCategories.Where(x => x.SignUpId == 7) select itemcategory).ToList();
             itemCategorieslist.Insert(0, new ItemCategory { ItemCategoryId = 0, ItemCategoryName = "Select" });
             ViewBag.ListItemCategory = itemCategorieslist;
-            
 
             return View();
+            
         }
 
         // POST: Item/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(ItemDTO obj, List<IFormFile> ImageFile, int id)
+        public ActionResult CreateItem(ItemDTO obj, IFormFile files1, IFormFile files2, IFormFile files3, IFormFile files4, int id)
         {
-            string fileName = Path.GetFileNameWithoutExtension(obj.ImageFile.ToString());
-            string extension = Path.GetExtension(obj.ImageFile.ToString());
-            fileName = fileName + extension;
-            var url = "/ItemImage" + fileName;
-            fileName = Path.Combine((url), fileName);
-            obj.ImageFile.Equals(fileName);
-            foreach (var FileUpload in ImageFile)
-            {
-                if (FileUpload.Length > 0)
-                {
-                    using (var stream = new FileStream(fileName, FileMode.Create))
-                    {
-                        FileUpload.CopyToAsync(stream);
-
-                    }
-                }
-            }
-            ////brrr
-            //if (ModelState.IsValid)
-            //{
-
-            //    long size = files.Sum(f => f.Length);
-
-            //    // full path to file in temp location
-            //    var filePath = Path.Combine()
-
-            //    foreach (var formFile in files)
-            //    {
-            //        if (formFile.Length > 0)
-            //        {
-            //            using (var stream = new FileStream(filePath, FileMode.Create))
-            //            {
-            //                await formFile.CopyToAsync(stream);
-            //            }
-
-            //        }
-
-            /////brrrrrrr
-            //if (ImageUrl != null)
-            //
-            // var ImagePath = Path.GetFileNameWithoutExtension();
-            //    if (ImageUrl.Length>0)
-            //    {
-            //        using (var stream = new FileStream(ImagePath, FileMode.Create))
-            //        {
-            //            ImageUrl.CopyTo(stream);
-            //        }
-            //    }
-            //var url = Path.Combine("~/AItem/" + obj.signUp.SignUpId + obj.itemCategory.ItemCategoryId + obj.ItemId);
-            //var directory = new DirectoryInfo(url);
-
-            //if (directory.Exists == false)
-            //{
-            //    directory.Create();
-            //}
-
-            //using (var stream = new FileStream(url, FileMode.Create))
-            //{
-            //    ImageUrl.CopyTo(stream);
-            //}
-
-
-            //obj.ImageUrl =Convert.ToString(ImageUrl);
-
             var itemcategoryid = HttpContext.Request.Form["ItemCategoryId"].ToString();
             obj.ItemCategoryId = Convert.ToInt32(itemcategoryid);
 
-            _itemData.AddItem(obj);
-             return RedirectToAction("ItemList", "Item", new { id = id});
+            if (ModelState.IsValid)
+            {
                 
-            
-            
+
+                //First Image ///////////////////////////////////////////////////
+                if (files1 != null)
+                {
+                    var filepath = Path.GetTempFileName();
+                    string filename = ContentDispositionHeaderValue.Parse(files1.ContentDisposition).FileName.Trim('"');
+                    filename = this.EnsureFilename(filename);
+
+                    using (FileStream filestream = System.IO.File.Create(this.Getpath(filename, id, obj)))
+                    {
+                        files1.CopyToAsync(filestream);
+                        obj.ImageUrl1 = filename;
+                        
+                    }
+                }
+                //Second Image ////////////////////////////////////////////////
+                if (files2 != null)
+                {
+                    var filepath = Path.GetTempFileName();
+                    string filename = ContentDispositionHeaderValue.Parse(files2.ContentDisposition).FileName.Trim('"');
+                    filename = this.EnsureFilename(filename);
+
+                    using (FileStream filestream = System.IO.File.Create(this.Getpath(filename, id, obj)))
+                    {
+                        files2.CopyToAsync(filestream);
+                        obj.ImageUrl2 = filename;
+                    }
+                }
+                //Third image /////////////////////////////////////////////////
+                if (files3 != null)
+                {
+                    var filepath = Path.GetTempFileName();
+                    string filename = ContentDispositionHeaderValue.Parse(files3.ContentDisposition).FileName.Trim('"');
+                    filename = this.EnsureFilename(filename);
+
+                    using (FileStream filestream = System.IO.File.Create(this.Getpath(filename, id, obj)))
+                    {
+                        files3.CopyToAsync(filestream);
+                        obj.ImageUrl3 = filename;
+                    }
+                }
+                //Fourth Image ///////////////////////////////////////////////
+                if (files4 != null)
+                {
+                    var filepath = Path.GetTempFileName();
+                    string filename = ContentDispositionHeaderValue.Parse(files4.ContentDisposition).FileName.Trim('"');
+                    filename = this.EnsureFilename(filename);
+
+                    using (FileStream filestream = System.IO.File.Create(this.Getpath(filename, id, obj)))
+                    {
+                        files4.CopyToAsync(filestream);
+                        obj.ImageUrl4 = filename;
+                    }
+                }
+                //foreach (IFormFile item in files)
+                //{
+                //    string filename = ContentDispositionHeaderValue.Parse(item.ContentDisposition).FileName.Trim('"');
+                //    filename = this.EnsureFilename(filename);
+
+                //    using (FileStream filestream = System.IO.File.Create(this.Getpath(filename, id, obj)))
+                //    {
+                //        item.CopyToAsync(filestream);
+                //        obj.ImageUrl1 = filename;
+                //    }
+
+                //}
+                //Second Image ///////////////////////////////////////////////////
+                //foreach (IFormFile item in files)
+                //{
+                //    string filename = ContentDispositionHeaderValue.Parse(item.ContentDisposition).FileName.Trim('"');
+                //    //filename = this.EnsureFilename(filename);
+
+                //    using (FileStream filestream = System.IO.File.Create(this.Getpath(filename, id, obj)))
+                //    {
+                //        item.CopyToAsync(filestream);
+                //    }
+                //    obj.ImageUrl2 = filename;
+                //}
+                //// Third Image ///////////////////////////////////////////////////
+                //foreach (IFormFile item in files)
+                //{
+                //    string filename = ContentDispositionHeaderValue.Parse(item.ContentDisposition).FileName.Trim('"');
+                //    //filename = this.EnsureFilename(filename);
+
+                //    using (FileStream filestream = System.IO.File.Create(this.Getpath(filename, id, obj)))
+                //    {
+                //        item.CopyToAsync(filestream);
+                //    }
+                //    obj.ImageUrl3 = filename;
+                //}
+                ////Fourth Image /////////////////////////////////////////////////
+                //foreach (IFormFile item in files)
+                //{
+                //    string filename = ContentDispositionHeaderValue.Parse(item.ContentDisposition).FileName.Trim('"');
+                //    filename = this.EnsureFilename(filename);
+
+                //    using (FileStream filestream = System.IO.File.Create(this.Getpath(filename, id,obj)))
+                //    {
+                //        item.CopyToAsync(filestream);
+                //    }
+                //    obj.ImageUrl4 = filename;
+                //}
+                try
+                {
+                    _itemData.AddItem(obj);
+                    return RedirectToAction("ItemList", "Item", new { id = id });
+                }
+                catch (Exception)
+                {
+
+                    throw;
+                }
+            }
+            return View();
+         
+        }
+        private string Getpath(string filename, int id, ItemDTO obj)
+        {
+            string path = _hostingEnvironment.WebRootPath + "\\shopImages\\" + id +"\\ItemImages\\" + obj.ItemName + "\\";
+            if (!Directory.Exists(path))
+                Directory.CreateDirectory(path);
+            return path + filename;
+
+        }
+        private string EnsureFilename(string filename)
+        {
+            if (filename.Contains("\\"))
+                filename = filename.Substring(filename.LastIndexOf("\\") + 1);
+            return filename;
+
+
         }
 
         // GET: Item/Edit/5

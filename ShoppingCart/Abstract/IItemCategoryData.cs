@@ -1,4 +1,5 @@
-﻿using ShoppingCart.Areas.Shop.Models;
+﻿using ShoppingCart.Areas.Administration.ViewModels;
+using ShoppingCart.Areas.Shop.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,7 @@ namespace ShoppingCart.Abstract
     public interface IItemCategoryData
     {
         List<ItemCategoryDTO> ShowList(int id);
+        List<AdminCategoryViewModel> AdminShowList();
 
         ItemCategoryDTO EditById(int id);
         void Edited(ItemCategoryDTO obj);

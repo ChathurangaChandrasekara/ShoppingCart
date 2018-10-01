@@ -43,7 +43,7 @@ namespace ShoppingCart.Areas.Administration.Controllers
                 }
                 else if (loginobj.LoginType=="User")
                 {
-                    return RedirectToAction("Index", "User", new { area = "User" });
+                    return RedirectToAction("Index", "User", new { area = "User" , Id = id});
                 }
                 else if (loginobj.LoginType == "Shop" && loginobj.Active== true)
                 {
@@ -56,7 +56,7 @@ namespace ShoppingCart.Areas.Administration.Controllers
                 }
                 else if (loginobj.LoginType == "Admin")
                 {
-                    return RedirectToAction("Index", "Admin", new { area = "Administration" });
+                    return RedirectToAction("Index", "Admin", new { area = "Administration" ,Id = id});
                 }
                 else
                 {

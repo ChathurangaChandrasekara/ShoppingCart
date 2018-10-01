@@ -1,4 +1,5 @@
 ﻿using ShoppingCart.Abstract;
+using ShoppingCart.Areas.Administration.ViewModels;
 using ShoppingCart.Areas.Shop.Models;
 using ShoppingCart.Models;
 using System;
@@ -20,7 +21,7 @@ namespace ShoppingCart.Concrete
         public List<ItemCategoryDTO> ShowList(int id)
         {
             List<ItemCategoryDTO> list = new List<ItemCategoryDTO>();
-            List<ItemCategory> GetList = _db.ItemCategories.Where(x => x.SignUpId == id).ToList();
+            List<ItemCategory> GetList = _db.ItemCategories.Where(x => x.SignUpId == 7).ToList(); //get error .. ! error is how to select multi ID in single table
 
             foreach (var item in GetList)
             {
@@ -28,6 +29,24 @@ namespace ShoppingCart.Concrete
                 obj.ItemCategoryId = item.ItemCategoryId;
                 obj.ItemCategoryName = item.ItemCategoryName;
                 obj.SignUpId = item.SignUpId;
+
+                list.Add(obj);
+            }
+            return list;
+        }
+        //Admin Category View
+        public List<AdminCategoryViewModel> AdminShowList()
+        {
+            List<AdminCategoryViewModel> list = new List<AdminCategoryViewModel>();
+            List<ItemCategory> GetList =  _db.ItemCategories.ToList();
+            
+            foreach (var item in GetList)
+            {
+                AdminCategoryViewModel obj = new AdminCategoryViewModel();
+                obj.ItemCategoryId = item.ItemCategoryId;
+                obj.ItemCategoryName = item.ItemCategoryName;
+                obj.SignUpId = item.SignUpId;
+                obj.FullName = _db.SignUps.Where(x => x.SignUpId == item.SignUpId).Select(x=> x.FullName).FirstOrDefault();
 
                 list.Add(obj);
             }
@@ -49,6 +68,9 @@ namespace ShoppingCart.Concrete
         public void Edited(ItemCategoryDTO obj)
         {
             ItemCategory EditedCategory = _db.ItemCategories.Where(x => x.ItemCategoryId == obj.ItemCategoryId).FirstOrDefault();
+            EditedCategory.ItemCategoryId = obj.ItemCategoryId;
+            EditedCategory.ItemCategoryName = obj.ItemCategoryName;
+            EditedCategory.SignUpId = obj.SignUpId;
             _db.Entry(EditedCategory).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
             _db.SaveChanges();
         }

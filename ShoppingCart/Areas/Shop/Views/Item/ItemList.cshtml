@@ -8,9 +8,9 @@
 <h2>ItemList</h2>
 
 <p>
-    <a asp-action="Create" asp-route-id="@TempData["id"] ">Create New</a>
+    <a asp-action="CreateItem" asp-controller="Item" asp-route-id="@TempData["id"] ">Create New</a>
 </p>
-<table class="table">
+@*<table class="table">
     <thead>
         <tr>
             <th>
@@ -34,10 +34,27 @@
             <th></th>
         </tr>
     </thead>
-    <tbody>
+    <tbody>*@
         @foreach (var item in Model)
         {
-            <tr>
+            <div class="col-lg-4 col-md-4 col-sm-4">
+                <div class="thumbnail">
+                    <img src="~/shopImages/@item.SignUpId/ItemImages/@item.ItemName/@item.ImageUrl1" alt="errrroor" style="width:300px; height:300px;" />
+                    <div class="caption">
+                        <h3 class="pull-right">@item.UnitPrice.ToString("c")</h3>
+                        <h3>
+                            <a>@item.ItemName</a>
+                        </h3>
+                        <p>@item.Description</p>
+                        <p>@item.SignUpId</p>
+                        <p>@item.ItemName</p>
+                        <p>@item.ImageUrl1</p>
+                    </div>
+                </div>
+
+            </div>
+
+            @*<tr>
                 <td>
                     @Html.DisplayFor(modelItem => item.ItemName)
                 </td>
@@ -61,7 +78,8 @@
                     
                     <a asp-action="Delete" asp-controller="Item" asp-route-id="@TempData["id"]" asp-route-delete="@item.ItemId">Delete</a>
                 </td>
-            </tr>
+            </tr>*@
         }
-    </tbody>
-</table>
+
+    @*</tbody>
+</table>*@

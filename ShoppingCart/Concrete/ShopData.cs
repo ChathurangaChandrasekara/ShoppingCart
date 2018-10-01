@@ -76,17 +76,17 @@ namespace ShoppingCart.Concrete
         {
             SignUp SData = _db.SignUps.Where(x => x.SignUpId == obj.SignUpId).FirstOrDefault();
             MoreDetail Mdata = _db.MoreDetails.Where(x => x.SignUpId == obj.SignUpId).FirstOrDefault();
-            AllDataDTO AllData = new AllDataDTO();
+           
 
-            SData.FullName = AllData.FullName;
-            SData.Address = AllData.Address;
-            SData.Email = AllData.Email;
-            SData.PhoneNumber = AllData.PhoneNumber;
-            SData.LoginType = AllData.LoginType;
-            Mdata.AdditionAddress = AllData.AdditionAddress;
-            Mdata.AdditionPhoneNumber = AllData.AdditionPhoneNumber;
-            Mdata.Location = AllData.Location;
-            Mdata.ImageUrl = AllData.ImageUrl;
+            SData.FullName = obj.FullName;
+            SData.Address = obj.Address;
+            SData.Email = obj.Email;
+            SData.PhoneNumber = obj.PhoneNumber;
+            SData.LoginType = obj.LoginType;
+            Mdata.AdditionAddress = obj.AdditionAddress;
+            Mdata.AdditionPhoneNumber = obj.AdditionPhoneNumber;
+            Mdata.Location = obj.Location;
+            Mdata.ImageUrl = obj.ImageUrl;
 
             _db.SignUps.Update(SData);
             _db.MoreDetails.Update(Mdata); //.State = Microsoft.EntityFrameworkCore.EntityState.Modified;

@@ -44,7 +44,7 @@ namespace ShoppingCart.Areas.Shop.Controllers
             if (_db.MoreDetails.Any(x => x.SignUpId == id))
             {
                 //int getid = _db.MoreDetails.Where(x => x.SignUpId == id).Select(x => x.MoreDetailId).FirstOrDefault();
-                return RedirectToAction("EditMoreDetail", "Shop", new {id = id });
+                return RedirectToAction("ShowAllDetail", "Shop", new {id = id });
             }
             else
                 return RedirectToAction("AddMoreDetail", "Shop", new { id = id });
@@ -71,7 +71,7 @@ namespace ShoppingCart.Areas.Shop.Controllers
             foreach (IFormFile item in files)
              {
                 string filename = ContentDispositionHeaderValue.Parse(item.ContentDisposition).FileName.Trim('"');
-                filename = this.EnsureFilename(filename);
+                //filename = this.EnsureFilename(filename);
 
                 using (FileStream filestream = System.IO.File.Create(this.Getpath(filename,id)))
                 {
@@ -97,10 +97,10 @@ namespace ShoppingCart.Areas.Shop.Controllers
         //get uploaded image path
         private string Getpath(string filename, int id)
         {
-            string path = _hostingEnvironment.WebRootPath + "\\shopImages\\" + id + "\\images\\";
+            string path = _hostingEnvironment.WebRootPath + "\\shopImages\\" + id + "\\ShopLogo\\";
             if (!Directory.Exists(path))
-            Directory.CreateDirectory(path);
-                return path + filename;
+                Directory.CreateDirectory(path);
+            return path + filename;
             
         }
 
@@ -111,7 +111,7 @@ namespace ShoppingCart.Areas.Shop.Controllers
                 filename = filename.Substring(filename.LastIndexOf("\\") + 1);
             return filename;
 
-            
+
         }
 
         //edit shop more details
@@ -129,21 +129,20 @@ namespace ShoppingCart.Areas.Shop.Controllers
         {
             if (ModelState.IsValid)
             {
-                var filepath = Path.GetTempFileName();
+                //var filepath = Path.GetTempFileName();
 
-                foreach (IFormFile item in files)
-                {
-                    string filename = ContentDispositionHeaderValue.Parse(item.ContentDisposition).FileName.Trim('"');
-                    filename = this.EnsureFilename(filename);
+                //foreach (IFormFile item in files)
+                //{
+                //    string filename = ContentDispositionHeaderValue.Parse(item.ContentDisposition).FileName.Trim('"');
+                //    filename = this.EnsureFilename(filename);
 
-                    using (FileStream filestream = System.IO.File.Create(this.Getpath(filename, id)))
-                    {
-                        obj.ImageUrl = filename;
-                    }
+                //    using (FileStream filestream = System.IO.File.Create(this.Getpath(filename, id)))
+                //    {
+                //        obj.ImageUrl = filename;
+                //    }
 
-                }
-
-
+                //}
+                
                 try
                 {
                     _shopData.EditedDetail(obj);
@@ -165,21 +164,21 @@ namespace ShoppingCart.Areas.Shop.Controllers
         }
 
         // POST: Shop/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Delete(int id, IFormCollection collection)
+        //{
+        //    try
+        //    {
+        //        // TODO: Add delete logic here
 
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
+        //        return RedirectToAction(nameof(Index));
+        //    }
+        //    catch
+        //    {
+        //        return View();
+        //    }
+        //}
 
         
     }
