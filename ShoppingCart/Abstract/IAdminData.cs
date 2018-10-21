@@ -18,6 +18,7 @@ namespace ShoppingCart.Abstract
         void EditDetails(SignUpDTO obj);
         SignUpDTO DeleteDetailsId(int Id);
         void DeleteDetails(int Id);
+        SignUpDTO GetUserDetails(int id);
 
     }
 }
