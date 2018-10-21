@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 using ShoppingCart.Abstract;
 using ShoppingCart.Areas.Administration.Models;
 using ShoppingCart.Areas.Shop.Models;
+using ShoppingCart.Areas.Shop.ShopViewModels;
 using ShoppingCart.Models;
 
 namespace ShoppingCart.Areas.Shop.Controllers
@@ -19,11 +20,13 @@ namespace ShoppingCart.Areas.Shop.Controllers
         private ShoppingCartDbContext _db;
         private IHostingEnvironment _hostingEnvironment;
         public IShopData _shopData;
+        MainShopViewModel mainShopViewModel;
         public ShopController(IShopData shopData, IHostingEnvironment hostingEnvironment, ShoppingCartDbContext db)
         {
             _db = db;
             _hostingEnvironment = hostingEnvironment;
             _shopData = shopData;
+            mainShopViewModel = new MainShopViewModel();
         }
 
 
@@ -32,10 +35,71 @@ namespace ShoppingCart.Areas.Shop.Controllers
         public ActionResult Index(int id)
         {
             TempData["id"] = id;
-            return View(_shopData.ShopDetailId(id));
+            
+            mainShopViewModel.signUpDetails = _db.SignUps.Where(x => x.SignUpId == id).FirstOrDefault();
+
+            mainShopViewModel.moreDetail = _db.MoreDetails.Where(x => x.SignUpId == id).FirstOrDefault();
+
+            mainShopViewModel.CategoryList = _db.ItemCategories.Where(x => x.SignUpId == id).ToList();
+
+            List<Item> ListItem = _db.Items.Where(x => x.SignUpId == id).ToList();
+            List<ItemDTO> itemDTOs = new List<ItemDTO>();
+            foreach (var item in ListItem)
+            {
+                ItemDTO obj = new ItemDTO();
+
+                obj.Description = item.Description;
+                obj.ImageUrl1 = item.ImageUrl1;
+                obj.ImageUrl2 = item.ImageUrl2;
+                obj.ImageUrl3 = item.ImageUrl3;
+                obj.ImageUrl4 = item.ImageUrl4;
+                obj.itemCategory = item.itemCategory;
+                obj.ItemCode = item.ItemCode;
+                obj.ItemId = item.ItemId;
+                obj.ItemName = item.ItemName;
+                obj.Quantity = item.Quantity;
+                obj.UnitPrice = item.UnitPrice;
+                obj.SignUpId = item.SignUpId;
+                obj.ItemCategoryId = item.ItemCategoryId;
+
+
+
+                itemDTOs.Add(obj);
+            }
+            mainShopViewModel.items = itemDTOs;
+            return View(mainShopViewModel); 
         }
 
+        public ActionResult CategoryListItem (int id)
+        {
+            List<Item> categoryListItem = _db.Items.Where(x => x.ItemCategoryId == id).ToList();
+            List<ItemDTO> itemDTOs = new List<ItemDTO>();
+            foreach (var item in categoryListItem)
+            {
+                ItemDTO obj = new ItemDTO();
 
+                obj.Description = item.Description;
+                obj.ImageUrl1 = item.ImageUrl1;
+                obj.ImageUrl2 = item.ImageUrl2;
+                obj.ImageUrl3 = item.ImageUrl3;
+                obj.ImageUrl4 = item.ImageUrl4;
+                obj.itemCategory = item.itemCategory;
+                obj.ItemCode = item.ItemCode;
+                obj.ItemId = item.ItemId;
+                obj.ItemName = item.ItemName;
+                obj.Quantity = item.Quantity;
+                obj.UnitPrice = item.UnitPrice;
+                obj.SignUpId = item.SignUpId;
+                obj.ItemCategoryId = item.ItemCategoryId;
+
+
+
+                itemDTOs.Add(obj);
+            }
+            return View(itemDTOs);
+
+        }
+        
 
         //add more detail if they are not
         public ActionResult CheckMoreDetail(int id)
@@ -163,22 +227,11 @@ namespace ShoppingCart.Areas.Shop.Controllers
             return View(_shopData.ShowAllDetail(id));
         }
 
-        // POST: Shop/Delete/5
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Delete(int id, IFormCollection collection)
-        //{
-        //    try
-        //    {
-        //        // TODO: Add delete logic here
+       public ActionResult ViewByCategory(int id)
+        {
 
-        //        return RedirectToAction(nameof(Index));
-        //    }
-        //    catch
-        //    {
-        //        return View();
-        //    }
-        //}
+            return null;
+        }
 
         
     }
