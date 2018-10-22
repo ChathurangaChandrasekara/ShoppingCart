@@ -1,0 +1,38 @@
+﻿@model ShoppingCart.Areas.Shop.ShopViewModels.MainShopViewModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@{
+    ViewData["Title"] = "_MainShopViewModel";
+}
+
+
+<div class="row">
+    <div> <h2> @Model.signUpDetails.FullName </h2> <img src="~/shopImages/@Model.signUpDetails.SignUpId/ShopLogo/@Model.moreDetail.ImageUrl" style="width:100px; height:80px;"/></div>
+</div>
+<hr />
+    <div class="row">
+           
+            @foreach (var item in Model.items)
+            {
+                <div class="col-sm-3">
+                    <div class="thumbnail">
+                        <a asp-area="Shop" asp-controller="Item" asp-action="ItemDetail" asp-route-id="@item.ItemId">
+                            <img src="~/itemImages/@item.ItemCategoryId/@item.ImageUrl1" alt="No Image" style="width:300px; height:250px;">
+                            <div class="caption">
+
+                                <h4 class="pull-right">
+                                    @item.UnitPrice.ToString("c")
+                                </h4>
+                                <h4>
+                                    @item.ItemName
+                                </h4>
+                                <p> @item.Description </p>
+                            </div>
+                        </a>
+                        <div class="addToCart text-right">
+                            <p class="button">  <a asp-area="Home" asp-controller="Cart" asp-action="AddToShoppingCart" asp-route-id="@item.ItemId" class="btn btn-success btn-xs" id="cartButton">Add to cart</a> </p>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>

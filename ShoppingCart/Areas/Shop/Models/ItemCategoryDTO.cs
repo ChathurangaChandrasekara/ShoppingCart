@@ -15,5 +15,6 @@ namespace ShoppingCart.Areas.Shop.Models
 
         public SignUp signUp;
         public int SignUpId { get; set; }
+        public string Name { get; set; }
     }
 }

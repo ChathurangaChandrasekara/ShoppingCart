@@ -1,0 +1,59 @@
+﻿@model ShoppingCart.ViewModels.ShoppingCartViewModel
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+<div class="row checkoutForm">
+    <h2>Your shopping cart</h2>
+    <h4>Here are the items in your shopping cart</h4>
+
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Selected amount</th>
+                <th>Item</th>
+                <th class="text-right">Price</th>
+                <th class="text-right">Subtotal</th>
+                <th></th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var line in Model.ShoppingCart.ShoppingCartItems)
+            {
+                <tr>
+                    <td class="text-center">@line.Amount</td>
+                    <td class="text-left">@line.item.ItemName</td>
+                    <td class="text-right">@line.item.UnitPrice.ToString("c")</td>
+                    <td class="text-right">@((line.Amount * line.item.UnitPrice).ToString("c"))</td>
+                    <td class="text-center"><a class="glyphicon glyphicon-remove text-danger remove" asp-controller="Cart" asp-action="RemoveFromShoppingCart">Remove</a> </td>
+
+                </tr>
+            }
+        </tbody>
+
+        <tfoot>
+            <tr>
+                <td colspan="3" class="text-right">Total</td>
+                <td class="text-right">
+                    @Model.ShoppingCartTotal.ToString("c");
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+
+    <div class="text-right">
+        <div class="btn-group">
+            <a class="btn btn-success" asp-controller="Order" asp-action="Checkout">Check out</a>
+            <a class="btn-group">
+                <a class="btn btn-default" asp-area="Home" asp-controller="Home" asp-action="Home">
+                    Add more items
+                </a>
+                
+            </a>
+
+        </div>
+    </div>
+
+</div>

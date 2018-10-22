@@ -15,11 +15,11 @@ namespace ShoppingCart.Areas.Administration.Models
         public string Email { get; set; }
 
         [Required]
-        [MinLength(8, ErrorMessage = "Minimum 8 characters required")]
+        [MinLength(6, ErrorMessage = "Minimum 8 characters required")]
         [DataType(DataType.Password)]
         public string Password { get; set; }
 
-       
+        public bool RememberMe { get; set; }
 
     }
 }

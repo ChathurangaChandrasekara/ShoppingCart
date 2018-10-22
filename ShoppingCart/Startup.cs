@@ -13,6 +13,9 @@ using ShoppingCart.Concrete;
 using Microsoft.Extensions.FileProviders;
 using System.IO;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace ShoppingCart
 {
@@ -40,9 +43,25 @@ namespace ShoppingCart
             services.AddTransient<IAdminData, AdminData>();
             services.AddTransient<ILoginData, LoginData>();
             services.AddTransient<ICartData, CartData>();
+            services.AddTransient<IUserData, UserData>();
+            services.AddTransient<IOrderData, OrderData>();
 
-            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-            services.AddScoped(sp => CartData.GetCart(sp));
+            services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<ShoppingCartDbContext>().AddDefaultTokenProviders();
+            services.ConfigureApplicationCookie(options => options.LoginPath = "/Administration/Login/Login");
+            //services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            //services.AddScoped(sp => Cart.GetCart(sp));
+
+            services.AddAuthentication(options =>
+            {
+                options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+            }).AddCookie(options => { options.LoginPath = "/Login"; });
+            services.AddMvc().AddRazorPagesOptions(options =>
+            {
+                options.Conventions.AuthorizeFolder("/");
+                options.Conventions.AllowAnonymousToPage("/Login");
+            });
 
             services.AddMvc();
             services.AddMemoryCache();
@@ -52,7 +71,7 @@ namespace ShoppingCart
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
             if (env.IsDevelopment())
             {
@@ -64,8 +83,11 @@ namespace ShoppingCart
                 app.UseExceptionHandler("/Home/Error");
             }
 
+            
+            loggerFactory.AddConsole();
             app.UseStaticFiles();
             app.UseSession();
+            app.UseAuthentication();
             app.UseDirectoryBrowser(new DirectoryBrowserOptions()
             {
                 FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot", "shopImages")),

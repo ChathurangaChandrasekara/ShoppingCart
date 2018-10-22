@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ShoppingCart.Abstract;
@@ -10,6 +11,7 @@ using ShoppingCart.Areas.Shop.Models;
 
 namespace ShoppingCart.Areas.Administration.Controllers
 {
+    [Authorize]
     public class AdminController : Controller
     {
         ILoginData _loginData;
@@ -141,7 +143,7 @@ namespace ShoppingCart.Areas.Administration.Controllers
                 try
                 {
                     _adminData.EditDetails(obj);
-                    return RedirectToAction("EditUser", "Admin");
+                    return RedirectToAction("GetUser", "Admin");
                 }
                 catch (Exception ex)
                 {
@@ -151,6 +153,12 @@ namespace ShoppingCart.Areas.Administration.Controllers
                
             }
             return View();
+        }
+
+        [HttpGet]
+        public ActionResult UserDetail(int id)
+        {
+            return View(_adminData.GetUserDetails(id));
         }
 
 
@@ -236,12 +244,14 @@ namespace ShoppingCart.Areas.Administration.Controllers
         //Admin Can Access to All Category 
         public ActionResult AdminCategoryList(int id)
         {
+            id = 7;
             TempData["id"] = id;
             return View(_itemCategoryData.AdminShowList());
         }
 
         public ActionResult AdminCategoryCreate(int id)
         {
+            id = 7;
             TempData["id"] = id;
             return View();
         }

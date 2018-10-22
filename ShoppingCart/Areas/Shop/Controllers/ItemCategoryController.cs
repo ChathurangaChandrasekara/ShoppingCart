@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ShoppingCart.Abstract;
@@ -10,6 +11,7 @@ using ShoppingCart.Models;
 
 namespace ShoppingCart.Areas.Shop.Controllers
 {
+    [Authorize]
     public class ItemCategoryController : Controller
     {
         public IItemCategoryData _itemCategoryData;

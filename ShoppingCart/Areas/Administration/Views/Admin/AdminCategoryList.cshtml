@@ -23,6 +23,7 @@
                 @Html.DisplayNameFor(model => model.FullName)
             </th>
             <th></th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -39,9 +40,10 @@
                 @Html.DisplayFor(modelItem => item.FullName)
             </td>
             <td>
-                <a asp-area="Administration" asp-controller="Admin" asp-action="AdminCategoryEdit" asp-route-id="@TempData["id"]" asp-route-edit="@item.ItemCategoryId">Edit</a> |
-
-                <a asp-area="Administration" asp-controller="Admin" asp-action="AdminCategoryDelete" asp-route-id="@TempData["id"]" asp-route-delete="@item.ItemCategoryId">Delete</a>
+                <a class="btn btn-primary btn-xs" asp-area="Administration" asp-controller="Admin" asp-action="AdminCategoryEdit" asp-route-id="@TempData["id"]" asp-route-edit="@item.ItemCategoryId">Edit</a>
+            </td>
+            <td>
+                <a class="btn btn-danger btn-xs" asp-area="Administration" asp-controller="Admin" asp-action="AdminCategoryDelete" asp-route-id="@TempData["id"]" asp-route-delete="@item.ItemCategoryId">Delete</a>
             </td>
         </tr>
         }

@@ -12,9 +12,11 @@ using ShoppingCart.Models;
 using System.Net.Http.Headers;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Hosting.Server;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ShoppingCart.Areas.Shop.Controllers
 {
+    [Authorize]
     public class ItemController : Controller
     {
         ShoppingCartDbContext _db;

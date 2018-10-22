@@ -1,4 +1,5 @@
-﻿using ShoppingCart.Abstract;
+﻿using Microsoft.AspNetCore.Identity;
+using ShoppingCart.Abstract;
 using ShoppingCart.Areas.Administration.Models;
 using ShoppingCart.Models;
 using System;
@@ -11,63 +12,77 @@ namespace ShoppingCart.Concrete
     public class LoginData : ILoginData
     {
         private readonly ShoppingCartDbContext _db;
+        private readonly UserManager<IdentityUser> _userManager;
+        private readonly SignInManager<IdentityUser> _signInManager;
 
-        public LoginData(ShoppingCartDbContext db)
+        public LoginData(ShoppingCartDbContext db, UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
         {
+            _userManager = userManager;
+            _signInManager = signInManager;
             _db = db;
         }
 
-        public LoginMessaageDTO checkLogin(LoginDTO loginobj)
-        {
-            LoginMessaageDTO msgObj = new LoginMessaageDTO();
-            if (_db.SignUps.Where(x=>x.Email==loginobj.Email && x.Password==loginobj.Password).Any())
-            {
-                string LoginType = _db.SignUps.Where(x => x.Email == loginobj.Email).Select(x => x.LoginType).FirstOrDefault();
-                bool? Active = _db.SignUps.Where(x => x.Email == loginobj.Email).Select(x => x.Active).FirstOrDefault();
-                int Id = _db.SignUps.Where(x => x.Email == loginobj.Email).Select(x => x.SignUpId).FirstOrDefault();
-                if (LoginType == "User")
-                {
-                    msgObj.Id = Id;
-                    msgObj.Email = loginobj.Email;
-                    msgObj.Message = "user login";
-                    msgObj.LoginType = "User";
-                }
-                else if(LoginType == "Shop")
-                {
-                    msgObj.Id = Id;
-                    msgObj.Active = Active;
-                    msgObj.Email = loginobj.Email;
-                    msgObj.Message = "Shop login";
-                    msgObj.LoginType = "Shop";
-                }
-                else
-                {
-                    msgObj.Id = Id;
-                    msgObj.Email = loginobj.Email;
-                    msgObj.Message = "Admin login";
-                    msgObj.LoginType = "Admin";
-                }
-            }
-            else if(_db.SignUps.Where(x => x.Email == loginobj.Email || x.Password == loginobj.Password).Any())
-            {
-                if (_db.SignUps.Where(x => x.Email == loginobj.Email).Any())
-                {
-                    msgObj.Message = "Password is incorrect";
-                    msgObj.LoginType = "Error";
-                }
-                else
-                {
-                    msgObj.Message = "Email is incorrect";
-                    msgObj.LoginType = "Error";
-                }
-            }
-            else
-            {
-                msgObj.Message = "user name And Email is incorrect";
-                msgObj.LoginType = "Error";
-            }
-            return msgObj;
-        }
+        //public async TaskLoginMessaageDTO> checkLoginAsync(LoginDTO loginobj)
+        //{
+        //    LoginMessaageDTO msgObj = new LoginMessaageDTO();
+        //    var email = await _userManager.FindByEmailAsync(loginobj.Email);
+        //    if (email != null)
+        //    {
+        //        var result = await _signInManager.PasswordSignInAsync(email, loginobj.Password, false, false);
+        //        if (result.Succeeded)
+        //        {
+
+               
+        //    //if (_db.SignUps.Where(x=>x.Email==loginobj.Email && x.Password==loginobj.Password).Any())
+        //    //{
+        //        string LoginType = _db.SignUps.Where(x => x.Email == loginobj.Email).Select(x => x.LoginType).FirstOrDefault();
+        //        bool? Active = _db.SignUps.Where(x => x.Email == loginobj.Email).Select(x => x.Active).FirstOrDefault();
+        //        int Id = _db.SignUps.Where(x => x.Email == loginobj.Email).Select(x => x.SignUpId).FirstOrDefault();
+        //        if (LoginType == "User")
+        //        {
+        //            msgObj.Id = Id;
+        //            msgObj.Email = loginobj.Email;
+        //            msgObj.Message = "user login";
+        //            msgObj.LoginType = "User";
+        //        }
+        //        else if(LoginType == "Shop")
+        //        {
+        //            msgObj.Id = Id;
+        //            msgObj.Active = Active;
+        //            msgObj.Email = loginobj.Email;
+        //            msgObj.Message = "Shop login";
+        //            msgObj.LoginType = "Shop";
+        //        }
+        //        else
+        //        {
+        //            msgObj.Id = Id;
+        //            msgObj.Email = loginobj.Email;
+        //            msgObj.Message = "Admin login";
+        //            msgObj.LoginType = "Admin";
+        //        }
+        //    //}
+        //     }
+        //    }
+        //    else if(_db.SignUps.Where(x => x.Email == loginobj.Email || x.Password == loginobj.Password).Any())
+        //    {
+        //        if (_db.SignUps.Where(x => x.Email == loginobj.Email).Any())
+        //        {
+        //            msgObj.Message = "Password is incorrect";
+        //            msgObj.LoginType = "Error";
+        //        }
+        //        else
+        //        {
+        //            msgObj.Message = "Email is incorrect";
+        //            msgObj.LoginType = "Error";
+        //        }
+        //    }
+        //    else
+        //    {
+        //        msgObj.Message = "user name And Email is incorrect";
+        //        msgObj.LoginType = "Error";
+        //    }
+        //    return msgObj;
+        //}
 
         public List<SignUpDTO> getAllLoginData()
         {
@@ -125,5 +140,7 @@ namespace ShoppingCart.Concrete
            
 
         }
-    }
+
+     
+    }  
 }

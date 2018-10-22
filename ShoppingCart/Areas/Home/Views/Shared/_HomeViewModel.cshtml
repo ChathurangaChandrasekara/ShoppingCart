@@ -1,0 +1,73 @@
+﻿@model ShoppingCart.Areas.Home.ViewModels.HomeViewModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    ViewData["Title"] = "HomeViewModel";
+   
+}
+
+<h2>Index</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+
+
+
+
+<div>Add Shopping Cart Logo <img src="~/images/banner1.svg" /></div>
+<div class="row">
+    <div class="col-sm-3">
+        <ul class="list-group">
+            @foreach (var item in Model.ShopList)
+            {
+                <ul>
+                    <a asp-area="Home" asp-controller="Home" asp-action="Shop" asp-route-id="@item.SignUpId">
+                        <h4>  @item.FullName </h4>
+                    </a>
+                </ul>
+            }
+        </ul>
+    </div>
+    <div class="thumbnail col-sm-9">
+
+
+        @for (int j = 0; j < Model.Category.Count; j++)
+        {
+        <div class="row">
+            <div class="caption"><h4> @Model.ListCategory[j].ItemCategoryName </h4></div>
+            @for (int i = 0; i < Model.ItemList.Count; i++)
+            {
+
+                @if (Model.ItemList[i].ItemCategoryId == Model.ListCategory[j].ItemCategoryId)
+                {
+                    <div class="col-sm-3">
+                        <div class="thumbnail">
+                            <a asp-area="Home" asp-controller="Home" asp-action="Item" asp-route-id="@Model.ItemList[i].ItemId">
+                                <img src="~/itemImages/@Model.ListCategory[j].ItemCategoryId/@Model.ItemList[i].ImageUrl1" alt="No Image" style="width:200px; height:150px;">
+                                <div class="caption">
+
+                                    <h5 class="pull-right">
+                                        @Model.ItemList[i].UnitPrice.ToString("c")
+                                    </h5>
+                                    <h5>
+                                        @Model.ItemList[i].ItemName
+                                    </h5>
+                                    <p> @Model.ItemList[i].Description </p>
+                                </div>
+                            </a>
+                            <div class="addToCart text-right">
+                                <p class="button">  <a asp-area="Home" asp-controller="Cart" asp-action="AddToShoppingCart" asp-route-id="@Model.ItemList[i].ItemId"  class="btn btn-success btn-xs" id="cartButton">Add to cart</a> </p>
+                            </div>
+                        </div>
+                    </div>
+                }
+
+            }
+        </div>
+                }
+           
+
+
+        </div>
+        
+</div>

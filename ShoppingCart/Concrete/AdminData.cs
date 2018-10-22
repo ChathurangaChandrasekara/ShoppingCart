@@ -126,7 +126,7 @@ namespace ShoppingCart.Concrete
         public List<SignUpDTO> SearchUser(string searchName)
         {
             List<SignUpDTO> SearchUserSignUpDTO = new List<SignUpDTO>();
-            List<SignUp> SearchUserList = _db.SignUps.Where(x => x.FullName.Contains(searchName) && x.LoginType == "User" && x.Active == null).ToList();
+            List<SignUp> SearchUserList = _db.SignUps.Where(x => x.FullName.Contains(searchName) && x.LoginType == "User").ToList();
             foreach (var item in SearchUserList)
             {
                 SignUpDTO obj = new SignUpDTO();
@@ -201,6 +201,23 @@ namespace ShoppingCart.Concrete
             SignUp signupobj = _db.SignUps.Where(x => x.SignUpId == Id).FirstOrDefault();
             _db.Entry(signupobj).State = Microsoft.EntityFrameworkCore.EntityState.Deleted;
             _db.SaveChanges();
+        }
+
+        public SignUpDTO GetUserDetails(int id)
+        {
+            SignUp Getobj = _db.SignUps.Where(x => x.SignUpId == id).FirstOrDefault();
+            SignUpDTO GetDetails = new SignUpDTO();
+
+            GetDetails.Active = Getobj.Active;
+            GetDetails.Address = Getobj.Address;
+            GetDetails.Email = Getobj.Email;
+            GetDetails.FullName = Getobj.FullName;
+            GetDetails.LoginType = Getobj.LoginType;
+            GetDetails.Password = Getobj.Password;
+            GetDetails.PhoneNumber = Getobj.PhoneNumber;
+            GetDetails.SignUpId = Getobj.SignUpId;
+
+            return GetDetails;
         }
     }
 }

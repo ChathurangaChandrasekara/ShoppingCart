@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ShoppingCart.Models
 {
-    public class SignUp
+    public class  SignUp
     {
         public int SignUpId { get; set; }
 
@@ -16,7 +16,7 @@ namespace ShoppingCart.Models
 
         [Required]
         public string Address { get; set; }
-
+        [Key]
         [Required]
         [DataType(DataType.EmailAddress, ErrorMessage = "Invalid Email Address")]
         public string Email { get; set; }
@@ -27,7 +27,7 @@ namespace ShoppingCart.Models
         public string PhoneNumber { get; set; }
 
         [Required]
-        [MinLength(8, ErrorMessage = "Minimum 8 characters required")]
+        [MinLength(6, ErrorMessage = "Minimum 8 characters required")]
         [DataType(DataType.Password)]
         public string Password { get; set; }
 

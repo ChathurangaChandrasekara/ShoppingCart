@@ -11,7 +11,7 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Edit">
+        <form asp-controller="Item" asp-action="Edit" method="post"  enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="ItemId" />
             <div class="form-group">
@@ -25,9 +25,24 @@
                 <span asp-validation-for="ItemCode" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ImageUrl1" class="control-label"></label>
-                <input asp-for="ImageUrl1" class="form-control" />
+                <img src="~/itemImages/@Model.ItemCategoryId/@Model.ImageUrl1" alt="errrroor" style="width:350px; height:300px;" />
+                <input type="file" id="files" name="files1" asp-for="ImageUrl1" class="form-control" />
                 <span asp-validation-for="ImageUrl1" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <img src="~/itemImages/@Model.ItemCategoryId/@Model.ImageUrl2" alt="errrroor" style="width:350px; height:300px;" />
+                <input type="file" id="files" name="files2" asp-for="ImageUrl2" class="form-control" />
+                <span asp-validation-for="ImageUrl2" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <img src="~/itemImages/@Model.ItemCategoryId/@Model.ImageUrl3" alt="errrroor" style="width:350px; height:300px;" />
+                <input type="file" id="files" name="files3" asp-for="ImageUrl3" class="form-control" />
+                <span asp-validation-for="ImageUrl3" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <img src="~/itemImages/@Model.ItemCategoryId/@Model.ImageUrl4" alt="errrroor" style="width:350px; height:300px;" />
+                <input type="file" id="files" name="files4" asp-for="ImageUrl4" class="form-control" />
+                <span asp-validation-for="ImageUrl4" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="UnitPrice" class="control-label"></label>
@@ -45,6 +60,16 @@
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="itemCategory" class="control-label"></label>
+                <select asp-for="ItemCategoryId" class="form-control" asp-items="@(new SelectList(ViewBag.ListItemCategory, "ItemCategoryId","ItemCategoryName"))"></select>
+
+            </div>
+            <div class="form-group">
+                
+                <input type="hidden" asp-for="SignUpId" class="form-control" />
+                
+            </div>
+            <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-default" />
             </div>
         </form>
@@ -52,6 +77,6 @@
 </div>
 
 <div>
-    <a asp-action="ItemList" asp-controller="Item" asp-route-id="@TempData["id"]">Back to List</a>
+    <a asp-action="ItemList" asp-route-id="@Model.SignUpId">Back to List</a>
 </div>
 

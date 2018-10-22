@@ -46,30 +46,38 @@ namespace ShoppingCart.Concrete
 
             GetItemDetail.Description = GetItemDetailId.Description;
             GetItemDetail.ImageUrl1 = GetItemDetailId.ImageUrl1;
-            GetItemDetail.itemCategory = GetItemDetailId.itemCategory;
+            GetItemDetail.ImageUrl2 = GetItemDetailId.ImageUrl2;
+            GetItemDetail.ImageUrl3 = GetItemDetailId.ImageUrl3;
+            GetItemDetail.ImageUrl4 = GetItemDetailId.ImageUrl4;
+            GetItemDetail.ItemCategoryId = GetItemDetailId.ItemCategoryId;
             GetItemDetail.ItemCode = GetItemDetailId.ItemCode;
             GetItemDetail.ItemId = GetItemDetailId.ItemId;
             GetItemDetail.ItemName = GetItemDetailId.ItemName;
             GetItemDetail.Quantity = GetItemDetailId.Quantity;
             GetItemDetail.UnitPrice = GetItemDetailId.UnitPrice;
+            GetItemDetail.SignUpId = GetItemDetailId.SignUpId;
             
             return GetItemDetail;
         }
 
         public void EditedItem(ItemDTO obj)
         {
-            Item EditedItemDetail = _db.Items.Where(x => x.signUp.SignUpId == obj.signUp.SignUpId).FirstOrDefault();
+            Item EditedItemDetail = _db.Items.Where(x => x.ItemId == obj.ItemId).FirstOrDefault();
 
             EditedItemDetail.Description = obj.Description;
             EditedItemDetail.ImageUrl1 = obj.ImageUrl1;
-            EditedItemDetail.itemCategory = obj.itemCategory;
+            EditedItemDetail.ImageUrl2 = obj.ImageUrl2;
+            EditedItemDetail.ImageUrl3 = obj.ImageUrl3;
+            EditedItemDetail.ImageUrl4 = obj.ImageUrl4;
             EditedItemDetail.ItemCode = obj.ItemCode;
             EditedItemDetail.ItemId = obj.ItemId;
             EditedItemDetail.ItemName = obj.ItemName;
             EditedItemDetail.Quantity = obj.Quantity;
             EditedItemDetail.UnitPrice = obj.UnitPrice;
+            EditedItemDetail.SignUpId = obj.SignUpId;
+            EditedItemDetail.ItemCategoryId = obj.ItemCategoryId;
 
-            _db.Entry(EditedItemDetail).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            _db.Items.Update(EditedItemDetail);
             _db.SaveChanges();
         }
 
@@ -84,6 +92,9 @@ namespace ShoppingCart.Concrete
 
                 obj.Description = item.Description;
                 obj.ImageUrl1 = item.ImageUrl1;
+                obj.ImageUrl2 = item.ImageUrl2;
+                obj.ImageUrl3 = item.ImageUrl3;
+                obj.ImageUrl4 = item.ImageUrl4;
                 obj.itemCategory = item.itemCategory;
                 obj.ItemCode = item.ItemCode;
                 obj.ItemId = item.ItemId;
@@ -92,6 +103,7 @@ namespace ShoppingCart.Concrete
                 obj.UnitPrice = item.UnitPrice;
                 obj.SignUpId = item.SignUpId;
                 obj.ItemCategoryId = item.ItemCategoryId;
+
                 
 
                 ItemList.Add(obj);
@@ -106,6 +118,9 @@ namespace ShoppingCart.Concrete
 
             GetItemDTO.Description = GetItem.Description;
             GetItemDTO.ImageUrl1 = GetItem.ImageUrl1;
+            GetItemDTO.ImageUrl2 = GetItem.ImageUrl2;
+            GetItemDTO.ImageUrl3 = GetItem.ImageUrl3;
+            GetItemDTO.ImageUrl4 = GetItem.ImageUrl4;
             GetItemDTO.itemCategory = GetItem.itemCategory;
             GetItemDTO.ItemCode = GetItem.ItemCode;
             GetItemDTO.ItemId = GetItem.ItemId;
@@ -113,6 +128,7 @@ namespace ShoppingCart.Concrete
             GetItemDTO.Quantity = GetItem.Quantity;
             GetItemDTO.signUp = GetItem.signUp;
             GetItemDTO.UnitPrice = GetItem.UnitPrice;
+            GetItemDTO.SignUpId = GetItem.SignUpId;
 
             return GetItemDTO;
         }
@@ -131,12 +147,16 @@ namespace ShoppingCart.Concrete
             obj.Description = getItem.Description;
             //obj.ImageFile = getItem.i;
             obj.ImageUrl1 = getItem.ImageUrl1;
+            obj.ImageUrl2 = getItem.ImageUrl2;
+            obj.ImageUrl3 = getItem.ImageUrl3;
+            obj.ImageUrl4 = getItem.ImageUrl4;
             obj.ItemCategoryId = getItem.ItemCategoryId;
             obj.ItemCode = getItem.ItemCode;
             obj.ItemId = getItem.ItemId;
             obj.ItemName = getItem.ItemName;
             obj.Quantity = getItem.Quantity;
             obj.UnitPrice = getItem.UnitPrice;
+            obj.SignUpId = getItem.SignUpId;
             return obj;
         }
     }

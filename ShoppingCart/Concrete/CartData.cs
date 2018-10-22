@@ -13,37 +13,29 @@ namespace ShoppingCart.Concrete
     public class CartData : ICartData
     {
         private readonly ShoppingCartDbContext _shoppingCartDbContext;
-        private CartData(ShoppingCartDbContext shoppingCartDbContext)
+        public CartData(ShoppingCartDbContext shoppingCartDbContext)
         {
             _shoppingCartDbContext = shoppingCartDbContext;
         }
+
         public string ShoppingCartId { get; set; }
         public List<ShoppingCartItem> shoppingCartItems { get; set; }
 
-        public static CartData GetCart(IServiceProvider services)
-        {
-            ISession session = services.GetRequiredService<IHttpContextAccessor>()?.HttpContext.Session;
-
-            var context = services.GetService<ShoppingCartDbContext>();
-            string cartId = session.GetString("CartId") ?? Guid.NewGuid().ToString();
-
-            session.SetString("CartId", cartId);
-
-            return new CartData(context) { ShoppingCartId = cartId };
-        }
-
+        
         public void AddToCart(Item item, int Amount)
         {
-            var shoppingCartItem = _shoppingCartDbContext.ShoppingCartItems.SingleOrDefault(x => x.item.ItemId == item.ItemId && x.ShoppingCartId == ShoppingCartId);
+            var shoppingCartItem = _shoppingCartDbContext.ShoppingCartItems.SingleOrDefault(x => x.item.ItemId == item.ItemId);
 
             if (shoppingCartItem == null)
             {
                 shoppingCartItem = new ShoppingCartItem
                 {
-                    ShoppingCartId = ShoppingCartId,
+                    // ShoppingCartId = ShoppingCartId,
                     item = item,
                     Amount = 1
+                    
                 };
+                item.Quantity = item.Quantity - 1;
                 _shoppingCartDbContext.ShoppingCartItems.Add(shoppingCartItem);
             }
             else
@@ -92,5 +84,7 @@ namespace ShoppingCart.Concrete
             _shoppingCartDbContext.SaveChanges();
             return localAmount;
         }
+
+       
     }
 }

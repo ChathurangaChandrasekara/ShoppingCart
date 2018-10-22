@@ -1,0 +1,32 @@
+﻿@model IEnumerable<ShoppingCart.Areas.Shop.Models.ItemDTO>
+@{
+    ViewData["Title"] = "CategoryListItem";
+    
+}
+
+<h2>CategoryListItem</h2>
+
+@foreach (var item in Model)
+{
+    <div class="col-sm-3">
+        <div class="thumbnail">
+            <a asp-area="Shop" asp-controller="Item" asp-action="ItemDetail" asp-route-id="@item.ItemId">
+                <img src="~/itemImages/@item.ItemCategoryId/@item.ImageUrl1" alt="No Image" style="width:200px; height:150px;">
+                <div class="caption">
+
+                    <h4 class="pull-right">
+                        @item.UnitPrice.ToString("c")
+                    </h4>
+                    <h4>
+                        @item.ItemName
+                    </h4>
+                    <p> @item.Description </p>
+                </div>
+            </a>
+            <div class="addToCart text-right">
+                <p class="button">  <a asp-area="Home" asp-controller="Cart" asp-action="AddToShoppingCart" asp-route-id="@item.ItemId" class="btn btn-success btn-xs" id="cartButton">Add to cart</a> </p>
+            </div>
+        </div>
+    </div>
+
+}

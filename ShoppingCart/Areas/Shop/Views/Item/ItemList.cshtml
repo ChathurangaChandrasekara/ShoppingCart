@@ -39,7 +39,7 @@
         {
             <div class="col-lg-4 col-md-4 col-sm-4">
                 <div class="thumbnail">
-                    <img src="~/shopImages/@item.SignUpId/ItemImages/@item.ItemName/@item.ImageUrl1" alt="errrroor" style="width:300px; height:300px;" />
+                    <img src="~/itemImages/@item.ItemCategoryId/@item.ImageUrl1" alt="errrroor" style="width:350px; height:300px;" />
                     <div class="caption">
                         <h3 class="pull-right">@item.UnitPrice.ToString("c")</h3>
                         <h3>
@@ -49,6 +49,11 @@
                         <p>@item.SignUpId</p>
                         <p>@item.ItemName</p>
                         <p>@item.ImageUrl1</p>
+                        <div>
+                            <a asp-controller="Item" asp-action="Edit" asp-route-id="@item.SignUpId" asp-route-edit="@item.ItemId">Edit</a>
+                            <a asp-controller="Item" asp-action="ItemDetail" asp-route-id="@item.ItemId">Details</a>
+                            <a asp-controller="Item" asp-action="Delete" asp-route-id="@item.SignUpId" asp-route-delete="@item.ItemId">Delete</a>
+                        </div>
                     </div>
                 </div>
 

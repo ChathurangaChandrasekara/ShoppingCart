@@ -21,15 +21,24 @@ namespace ShoppingCart.Concrete
         public List<ItemCategoryDTO> ShowList(int id)
         {
             List<ItemCategoryDTO> list = new List<ItemCategoryDTO>();
-            List<ItemCategory> GetList = _db.ItemCategories.Where(x => x.SignUpId == 7).ToList(); //get error .. ! error is how to select multi ID in single table
-
+            List<ItemCategory> GetList = _db.ItemCategories.Where(x => x.SignUpId == id).ToList();  //get error .. ! error is how to select multi ID in single table
+            List<ItemCategory> GetList2 = _db.ItemCategories.Where(x => x.SignUpId == 7).ToList();
             foreach (var item in GetList)
             {
                 ItemCategoryDTO obj = new ItemCategoryDTO();
                 obj.ItemCategoryId = item.ItemCategoryId;
                 obj.ItemCategoryName = item.ItemCategoryName;
                 obj.SignUpId = item.SignUpId;
-
+                obj.Name = _db.SignUps.Where(x => x.SignUpId == id).Select(x => x.FullName).FirstOrDefault();
+                list.Add(obj);
+            }
+            foreach (var item2 in GetList2)
+            {
+                ItemCategoryDTO obj = new ItemCategoryDTO();
+                obj.ItemCategoryId = item2.ItemCategoryId;
+                obj.ItemCategoryName = item2.ItemCategoryName;
+                obj.SignUpId = item2.SignUpId;
+                
                 list.Add(obj);
             }
             return list;

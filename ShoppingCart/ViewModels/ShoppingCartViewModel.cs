@@ -1,4 +1,4 @@
-﻿using ShoppingCart.Concrete;
+﻿using ShoppingCart.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,8 +8,8 @@ namespace ShoppingCart.ViewModels
 {
     public class ShoppingCartViewModel
     {
-        public CartData ShoppingCart { get; set; }
-        public decimal ShoppingCartTotal { get; set; }
+        public Cart ShoppingCart { get; set; }
 
+        public decimal ShoppingCartTotal { get; set; }
     }
 }
