@@ -6,10 +6,13 @@ using System.Threading.Tasks;
 
 namespace ShoppingCart.Abstract
 {
-    interface ICartData
+    public interface ICartData
     {
-        
+        string ShoppingCartId { get; set; }
+        List<ShoppingCartItem> shoppingCartItems { get; set; }
+
         void AddToCart(Item item, int Amount);
+
         int RemoveFromCart(Item item);
         List<ShoppingCartItem> GetShoppingCartItems();
         void ClearCart();
