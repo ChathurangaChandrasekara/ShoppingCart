@@ -10,6 +10,6 @@ namespace ShoppingCart.Abstract
     {
         List<SignUpDTO> getAllLoginData();
         void  setAllLoginData(SignUpDTO signobj);
-        LoginMessaageDTO checkLogin(LoginDTO loginobj);
+        //LoginMessaageDTO checkLoginAsync(LoginDTO loginobj);
     }
 }
