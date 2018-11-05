@@ -17,11 +17,11 @@
 <div>Add Shopping Cart Logo <img src="~/images/banner1.svg" /></div>
 <div class="row">
     <div class="col-sm-3">
-        <ul class="list-group">
+        <ul class="alert alert-primary" role="alert">
             @foreach (var item in Model.ShopList)
             {
                 <ul>
-                    <a asp-area="Home" asp-controller="Home" asp-action="Shop" asp-route-id="@item.SignUpId">
+                    <a class="alert-link" asp-area="Home" asp-controller="Home" asp-action="Shop" asp-route-id="@item.SignUpId">
                         <h4>  @item.FullName </h4>
                     </a>
                 </ul>
